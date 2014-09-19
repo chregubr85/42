@@ -2,7 +2,7 @@
 <PEproject>
   <Header>
     <Name>ROBO</Name>
-    <SavedBy>Stefan</SavedBy>
+    <SavedBy>Christian</SavedBy>
     <ModificationStamp>2</ModificationStamp>
     <Date>2014-09-19</Date>
     <IDE>Eclipse IDE</IDE>
@@ -942,9 +942,9 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <Value />
         <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-        <EnumSymbVal>8</EnumSymbVal>
-        <Index>0</Index>
+        <EnumSymbVal>-1</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>DflashSettingsGrp</ItemSymbol>
@@ -11830,9 +11830,9 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
+        <Value />
         <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-        <EnumSymbVal>8</EnumSymbVal>
-        <Index>0</Index>
+        <EnumSymbVal>-1</EnumSymbVal>
       </ItemState>
       <ItemState>
         <ItemSymbol>DflashSettingsGrp</ItemSymbol>
