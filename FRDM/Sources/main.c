@@ -30,6 +30,13 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "LEDred.h"
+#include "BitIoLdd1.h"
+#include "LEDgreen.h"
+#include "BitIoLdd2.h"
+#include "LEDblue.h"
+#include "BitIoLdd3.h"
+#include "WAIT1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -52,6 +59,26 @@ int main(void)
   uint16_t a,b;
   a=5;
   b=2*a;
+
+for(;;){
+
+LEDred_ClrVal();
+WAIT1_Waitms(100);
+LEDred_SetVal();
+WAIT1_Waitms(100);
+
+LEDgreen_ClrVal();
+WAIT1_Waitms(100);
+LEDgreen_SetVal();
+WAIT1_Waitms(100);
+
+LEDblue_ClrVal();
+WAIT1_Waitms(100);
+LEDblue_SetVal();
+WAIT1_Waitms(100);
+
+}
+
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START

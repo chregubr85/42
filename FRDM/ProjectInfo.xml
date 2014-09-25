@@ -35,38 +35,52 @@
     <FLASHsize>128k</FLASHsize>
   </PROCESSOR>
   <PATHS>
-    <LinkerCommandFile>C:\_Dev\Intro_42\FRDM\Project_Settings\Linker_Files\ProcessorExpert.ld</LinkerCommandFile>
+    <LinkerCommandFile>C:\01_Intro\Project\FRDM\Project_Settings\Linker_Files\ProcessorExpert.ld</LinkerCommandFile>
     <IncludePaths>
       <Path>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\</Path>
       <Path>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\</Path>
-      <Path>C:\_Dev\Intro_42\FRDM\Sources\</Path>
-      <Path>C:\_Dev\Intro_42\FRDM\Generated_Code\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Sources\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Generated_Code\</Path>
     </IncludePaths>
     <SourceCodePaths>
-      <Path>C:\_Dev\Intro_42\FRDM\Generated_Code\</Path>
-      <Path>C:\_Dev\Intro_42\FRDM\Project_Settings\Startup_Code\</Path>
-      <Path>C:\_Dev\Intro_42\FRDM\Sources\Common\</Path>
-      <Path>C:\_Dev\Intro_42\FRDM\Sources\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Generated_Code\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Project_Settings\Startup_Code\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Sources\Common\</Path>
+      <Path>C:\01_Intro\Project\FRDM\Sources\</Path>
     </SourceCodePaths>
   </PATHS>
   <FILES>
     <GeneratedCs>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\Cpu.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\PE_LDD.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\Vectors.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Project_Settings\Startup_Code\startup.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Sources\Common\test.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Sources\Events.c</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Sources\main.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd1.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd2.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd3.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\Cpu.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDblue.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDgreen.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDred.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\PE_LDD.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\Vectors.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\WAIT1.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Project_Settings\Startup_Code\startup.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Sources\Common\test.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Sources\Events.c</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Sources\main.c</PathName>
     </GeneratedCs>
     <GeneratedHs>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\Cpu.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\IO_Map.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\PE_Const.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\PE_Error.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\PE_LDD.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Generated_Code\PE_Types.h</PathName>
-      <PathName>C:\_Dev\Intro_42\FRDM\Sources\Events.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd1.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd2.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\BitIoLdd3.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\Cpu.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\IO_Map.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDblue.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDgreen.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\LEDred.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\PE_Const.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\PE_Error.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\PE_LDD.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\PE_Types.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Generated_Code\WAIT1.h</PathName>
+      <PathName>C:\01_Intro\Project\FRDM\Sources\Events.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\iofiles\MKL25Z4.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\ADC_PDD.h</PathName>
       <PathName>C:\Freescale\KDS_1.1.1\eclipse\ProcessorExpert\lib\Kinetis\pdd\inc\CMP_PDD.h</PathName>

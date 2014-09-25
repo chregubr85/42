@@ -34,7 +34,7 @@
 		<link>
 			<name>Sources/Common</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Dummy/Common</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/Dummy/Common</locationURI>
 		</link>
 		<link>
 			<name>Static_Code/IO_Map/MK22F12.h</name>
