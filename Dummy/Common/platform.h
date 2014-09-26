@@ -12,18 +12,18 @@
 #include "PE_Error.h"
 #include "stddef.h"
 
-#define PL_BOARD_IS_FRDM (defined(PL_BOARD_IS_FRDM))
-#define PL_BOARD_IS_ROBO (defined(PL_BOARD_IS_ROBO))
+#define PL_IS_FRDM (defined(PL_BOARD_IS_FRDM))
+#define PL_IS_ROBO (defined(PL_BOARD_IS_ROBO))
 
 
-#if PL_BOARD_IS_FRDM
+#if  PL_IS_FRDM
 	#define PL_NOF_LEDS 3
 		//FRDM board has 3 LEDs(RGB)
-	#define LED_RED LED_1
+	#define LED_RED LED1
 	#define LED_BLUE LED_2
 	#define LED_GREEN LED_3
 
-#elif PL_BOARD_IS_ROBO
+#elif PL_IS_ROBO
 	#define PL_NOF_LEDS 2
 		//robo has 2 LEDs
 #else

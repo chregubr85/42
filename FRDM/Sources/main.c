@@ -30,11 +30,11 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
-#include "LEDred.h"
+#include "LedBit1.h"
 #include "BitIoLdd1.h"
-#include "LEDgreen.h"
+#include "LedBit2.h"
 #include "BitIoLdd2.h"
-#include "LEDblue.h"
+#include "LedBit3.h"
 #include "BitIoLdd3.h"
 #include "WAIT1.h"
 /* Including shared modules, which are used for whole project */
@@ -43,6 +43,8 @@
 #include "PE_Const.h"
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "platform.h"
+#include "LED.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -60,24 +62,16 @@ int main(void)
   a=5;
   b=2*a;
 
-for(;;){
+for(int i=0; i < 10; i++){
 
-LEDred_ClrVal();
-WAIT1_Waitms(100);
-LEDred_SetVal();
-WAIT1_Waitms(100);
+	testAllLed ();
 
-LEDgreen_ClrVal();
-WAIT1_Waitms(100);
-LEDgreen_SetVal();
-WAIT1_Waitms(100);
-
-LEDblue_ClrVal();
-WAIT1_Waitms(100);
-LEDblue_SetVal();
-WAIT1_Waitms(100);
 
 }
+
+	LED1_On();
+	WAIT1_Waitms(500);
+	initLED();
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/

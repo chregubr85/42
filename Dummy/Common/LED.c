@@ -1,4 +1,5 @@
 /**
+ * \file
  * This file implements a LED-Driver
  * @author: Christian Brunner
  * @date: 26.09.2014
@@ -7,6 +8,7 @@
 
 #include "platform.h"
 #include "LED.h"
+#include "WAIT1.h"
 
 void initLED(void){
 
@@ -39,7 +41,7 @@ void testAllLed (void){
 	WAIT1_Waitms(100);
 	LED1_On();
 	WAIT1_Waitms(100);
-	Led2_On();
+	LED2_On();
 	WAIT1_Waitms(100);
 	LED2_Off();
 	LED1_Off();
@@ -52,7 +54,7 @@ void testAllLed (void){
 	WAIT1_Waitms(100);
 	LED2_On();
 	WAIT1_Waitms(100);
-	Led1_On();
+	LED1_On();
 	WAIT1_Waitms(100);
 	LED3_Off();
 	LED2_Off();
