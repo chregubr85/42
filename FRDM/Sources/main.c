@@ -65,13 +65,22 @@ int main(void)
 for(int i=0; i < 10; i++){
 
 	testAllLed ();
+	WAIT1_Waitms(500);
+
+	LedRED_On();
+	WAIT1_Waitms(500);
+	LedRED_Off();
+	LedGREEN_On();
+	WAIT1_Waitms(500);
+	LedGREEN_Off();
+	LedBLUE_On();
+	WAIT1_Waitms(500);
+	LedBLUE_Off();
 
 
 }
 
-	LED1_On();
-	WAIT1_Waitms(500);
-	initLED();
+
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
