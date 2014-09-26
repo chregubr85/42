@@ -1,14 +1,19 @@
 /**
  * \file
- * This file implements a LED-Driver
- * @author: Christian Brunner
- * @date: 26.09.2014
- * @version: 0.1
+ * \brief LED driver
+ * \author Christian Brunner
+ *
+ *
+ * LED Driver Interface
  */
 
 #include "platform.h"
 #include "LED.h"
 #include "WAIT1.h"
+
+/*!
+ * \brief Initial all LEDs (Off)
+ */
 
 void initLED(void){
 
@@ -26,6 +31,9 @@ void initLED(void){
 #endif
 }
 
+/*!
+ * \brief Test Routine for our LED Driver
+ */
 
 void testAllLed (void){
 #if PL_NOF_LEDS >= 1
