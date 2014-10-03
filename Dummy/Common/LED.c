@@ -70,3 +70,118 @@ void testAllLed (void){
 #endif
 
 }
+
+/*!
+ * \brief Test Routine for our LED Driver
+ */
+
+void led12On(void){
+
+	LED1_On();
+	LED2_On();
+}
+
+/*!
+ * \brief mix colour on for RGB Led
+ */
+
+void led13On(void){
+
+	LED1_On();
+	LED3_On();
+}
+
+/*!
+ * \brief mix colour on for RGB Led
+ */
+
+void led23On(void){
+
+	LED2_On();
+	LED3_On();
+}
+
+/*!
+ * \brief mix colour on for RGB Led
+ */
+
+void led123On(void){
+
+	LED1_On();
+	LED2_On();
+	LED3_On();
+}
+
+/*!
+ * \brief mix colour off for RGB Led
+ */
+void led12Off(void){
+
+	LED1_Off();
+	LED2_Off();
+}
+
+/*!
+ * \brief mix colour off for RGB Led
+ */
+
+void led13Off(void){
+
+	LED1_Off();
+	LED3_Off();
+}
+
+/*!
+ * \brief mix colour off for RGB Led
+ */
+
+void led23Off(void){
+
+	LED2_Off();
+	LED3_Off();
+}
+
+/*!
+ * \brief mix colour off for RGB Led
+ */
+
+void led123Off(void){
+
+	LED1_Off();
+	LED2_Off();
+	LED3_Off();
+}
+
+/*!
+ * \brief Test Routine for our LED Driver
+ */
+
+void testcolour(void){
+
+	LedWHITE_On();
+	WAIT1_Waitms(100);
+	LedWHITE_Off();
+	LedYELLOW_On();
+	WAIT1_Waitms(100);
+	LedYELLOW_Off();
+	LedRED_On();
+	WAIT1_Waitms(100);
+	LedRED_Off();
+
+	LedVIOLET_On();
+	WAIT1_Waitms(100);
+	LedVIOLET_Off();
+
+	LedTORQUOISE_On();
+	WAIT1_Waitms(100);
+	LedTORQUOISE_Off();
+
+	LedBLUE_On();
+	WAIT1_Waitms(100);
+	LedBLUE_Off();
+
+	LedGREEN_On();
+	WAIT1_Waitms(150);
+	LedGREEN_Off();
+
+}

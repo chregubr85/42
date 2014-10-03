@@ -69,4 +69,14 @@
 void initLED(void);
 void testAllLed (void);
 
+void led12On(void);
+void led13On(void);
+void led23On(void);
+void led123On(void);
+void led12Off(void);
+void led13Off(void);
+void led23Off(void);
+void led123Off(void);
+void testcolour(void);
+
 #endif /* LED_H_ */

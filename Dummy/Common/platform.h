@@ -19,7 +19,7 @@
 #if  PL_IS_FRDM
 	#define PL_NOF_LEDS 3
 		//FRDM board has 3 LEDs(RGB)
-	  #define LedRED_On() 		LED1_On()
+
   	  #define LedRED_On() 		LED1_On()
   	  #define LedRED_Off() 		LED1_Off()
   	  #define LedRED_Neg()		LED1_Neg()
@@ -28,7 +28,7 @@
   	  #define LedRED_Init() 	LED1_Init()
   	  #define LedRED_Deinit() 	LED1_Deinit()
 
-	  #define LedGREEN_On()		LED2_On()
+
   	  #define LedGREEN_On() 	LED2_On()
   	  #define LedGREEN_Off() 	LED2_Off()
   	  #define LedGREEN_Neg()	LED2_Neg()
@@ -37,7 +37,7 @@
   	  #define LedGREEN_Init() 	LED2_Init()
   	  #define LedGREEN_Deinit() LED2_Deinit()
 
-	  #define LedBLUE_On() 		LED3_On()
+
   	  #define LedBLUE_On() 		LED3_On()
   	  #define LedBLUE_Off() 	LED3_Off()
   	  #define LedBLUE_Neg()		LED3_Neg()
@@ -45,6 +45,15 @@
   	  #define LedBLUE_Put(val) 	LED3_Put(val)
   	  #define LedBLUE_Init() 	LED3_Init()
   	  #define LedBLUE_Deinit() 	LED3_Deinit()
+
+	  #define LedYELLOW_On()		led12On()
+	  #define LedVIOLET_On()		led13On()
+	  #define LedTORQUOISE_On()		led23On()
+	  #define LedWHITE_On()			led123On()
+	  #define LedYELLOW_Off()		led12Off()
+	  #define LedVIOLET_Off()		led13Off()
+	  #define LedTORQUOISE_Off()	led23Off()
+	  #define LedWHITE_Off()		led123Off()
 
 #elif PL_IS_ROBO
 	#define PL_NOF_LEDS 2

@@ -62,20 +62,9 @@ int main(void)
   a=5;
   b=2*a;
 
-for(int i=0; i < 10; i++){
+for(;;){
 
-	testAllLed ();
-	WAIT1_Waitms(500);
-
-	LedRED_On();
-	WAIT1_Waitms(500);
-	LedRED_Off();
-	LedGREEN_On();
-	WAIT1_Waitms(500);
-	LedGREEN_Off();
-	LedBLUE_On();
-	WAIT1_Waitms(500);
-	LedBLUE_Off();
+	testcolour();
 
 
 }
