@@ -45,6 +45,7 @@
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "platform.h"
 #include "LED.h"
+#include "LED_FRDM.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)

@@ -152,36 +152,5 @@ void led123Off(void){
 	LED3_Off();
 }
 
-/*!
- * \brief Test Routine for our LED Driver
- */
 
-void testcolour(void){
 
-	LedWHITE_On();
-	WAIT1_Waitms(100);
-	LedWHITE_Off();
-	LedYELLOW_On();
-	WAIT1_Waitms(100);
-	LedYELLOW_Off();
-	LedRED_On();
-	WAIT1_Waitms(100);
-	LedRED_Off();
-
-	LedVIOLET_On();
-	WAIT1_Waitms(100);
-	LedVIOLET_Off();
-
-	LedTORQUOISE_On();
-	WAIT1_Waitms(100);
-	LedTORQUOISE_Off();
-
-	LedBLUE_On();
-	WAIT1_Waitms(100);
-	LedBLUE_Off();
-
-	LedGREEN_On();
-	WAIT1_Waitms(150);
-	LedGREEN_Off();
-
-}
