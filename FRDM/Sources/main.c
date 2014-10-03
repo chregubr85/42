@@ -47,6 +47,7 @@
 #include "platform.h"
 #include "init_platform.h"
 #include "LED.h"
+#include "LED_FRDM.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
