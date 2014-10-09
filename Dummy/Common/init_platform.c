@@ -12,7 +12,7 @@
 #include "init_platform.h"
 
 
-uint8 init_platoform(void){
+uint8 init_platform(void){
 	initLED(); //initialize LED
 
 	return 1;
