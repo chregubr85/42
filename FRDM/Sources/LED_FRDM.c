@@ -8,6 +8,7 @@
 
 #include "LED_FRDM.h"
 #include "LED.h"
+#include "WAIT1.h"
 
 
 /*!

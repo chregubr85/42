@@ -12,6 +12,7 @@
 #include "PE_Error.h"
 #include "stddef.h"
 
+
 #define PL_IS_FRDM (defined(PL_BOARD_IS_FRDM))
 #define PL_IS_ROBO (defined(PL_BOARD_IS_ROBO))
 
@@ -55,12 +56,18 @@
 	  #define LedTORQUOISE_Off()	led23Off()
 	  #define LedWHITE_Off()		led123Off()
 
+	  #define PL_HAS_EVENTS 1
+		// FRDM Board supports Events
+	  #define PL_HAS_TIMER 1
+
+
 #elif PL_IS_ROBO
 	#define PL_NOF_LEDS 2
 		//robo has 2 LEDs
 #else
 	#error "unknown board?"
 #endif
+
 
 
 #endif	/*PLATFORM_H_*/

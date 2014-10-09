@@ -38,6 +38,10 @@
 #include "BitIoLdd3.h"
 #include "WAIT1.h"
 #include "CS1.h"
+#include "HF1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "TU1.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -48,6 +52,9 @@
 #include "init_platform.h"
 #include "LED.h"
 #include "LED_FRDM.h"
+#include "Event.h"
+#include "Application.h"
+
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -62,7 +69,7 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
   init_platform();
-
+  run_app();
 for(;;){
 
 	CS1_CriticalVariable()

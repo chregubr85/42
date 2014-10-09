@@ -13,7 +13,8 @@
 
 
 uint8 init_platform(void){
-	initLED(); //initialize LED
-
+	initLED(); 		//initialize LED
+	EVNT_Init();	//initialize Event
+	TMR_Init();		//init Timer
 	return 1;
 }
