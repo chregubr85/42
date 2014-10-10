@@ -18,7 +18,7 @@
 void initLED(void){
 
 	/* All LEDs off */
-#if PL_NOF_LEDS >= 1
+#if (PL_NOF_LEDS >= 1) != PL_HAS_KEYS
 	LED1_Off();
 #endif
 
@@ -31,6 +31,8 @@ void initLED(void){
 #endif
 }
 
+
+#if 0
 /*!
  * \brief Test Routine for our LED Driver
  */
@@ -152,5 +154,5 @@ void led123Off(void){
 	LED3_Off();
 }
 
-
+#endif
 

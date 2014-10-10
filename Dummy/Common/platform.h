@@ -20,7 +20,14 @@
 #if  PL_IS_FRDM
 	#define PL_NOF_LEDS 3
 		//FRDM board has 3 LEDs(RGB)
+	#define PL_HAS_KEYS 1
+	#define PL_HAS_KBI 1
+ 	#define PL_HAS_JOYSTICK 1
+	#define PL_HAS_EVENTS 1
+		// FRDM Board supports Events
+	#define PL_HAS_TIMER 1
 
+#if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
   	  #define LedRED_Off() 		LED1_Off()
   	  #define LedRED_Neg()		LED1_Neg()
@@ -28,7 +35,7 @@
   	  #define LedRED_Put(val) 	LED1_Put(val)
   	  #define LedRED_Init() 	LED1_Init()
   	  #define LedRED_Deinit() 	LED1_Deinit()
-
+#endif
 
   	  #define LedGREEN_On() 	LED2_On()
   	  #define LedGREEN_Off() 	LED2_Off()
@@ -56,9 +63,7 @@
 	  #define LedTORQUOISE_Off()	led23Off()
 	  #define LedWHITE_Off()		led123Off()
 
-	  #define PL_HAS_EVENTS 1
-		// FRDM Board supports Events
-	  #define PL_HAS_TIMER 1
+
 
 
 #elif PL_IS_ROBO

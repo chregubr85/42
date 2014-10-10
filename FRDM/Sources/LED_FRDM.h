@@ -10,6 +10,6 @@
 
 
 
-void testcolour(void);
+//void testcolour(void);
 
 #endif /* LED_FRDM_H_ */

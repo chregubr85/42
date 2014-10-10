@@ -12,7 +12,9 @@
 #include "platform.h"
 
 #if PL_NOF_LEDS >= 1
- #include "LedBit1.h"
+	#if PL_HAS_KEYS == 0
+		#include "LedBit1.h"
+
   #define LED1_On()     LedBit1_ClrVal()
     /*!< Turn LED 1 on */
   #define LED1_Off()    LedBit1_SetVal()
@@ -27,6 +29,8 @@
     /*!< Initialize LED */
   #define LED1_Deinit() /* do nothing */
     /*!< De-Initialize LED */
+	#endif
+
 #endif
 
 #if PL_NOF_LEDS >= 2
@@ -67,8 +71,9 @@
 
 
 void initLED(void);
-void testAllLed (void);
+//void testAllLed (void);
 
+#if 0
 void led12On(void);
 void led13On(void);
 void led23On(void);
@@ -78,5 +83,6 @@ void led13Off(void);
 void led23Off(void);
 void led123Off(void);
 void testcolour(void);
+#endif
 
 #endif /* LED_H_ */

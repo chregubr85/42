@@ -14,6 +14,7 @@
 /*!
  * \brief Test Routine for our LED Driver
  */
+#if 0
 void testcolour(void){
 
 	LedWHITE_On();
@@ -43,3 +44,4 @@ void testcolour(void){
 	LedGREEN_Off();
 
 }
+#endif
