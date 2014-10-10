@@ -42,6 +42,7 @@
 #include "TI1.h"
 #include "TimerIntLdd1.h"
 #include "TU1.h"
+
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -54,7 +55,7 @@
 #include "LED_FRDM.h"
 #include "Event.h"
 #include "Application.h"
-
+#include "hard_fault.h"
 
 /*lint -save  -e970 Disable MISRA rule (6.3) checking. */
 int main(void)
@@ -72,6 +73,7 @@ int main(void)
   run_app();
 for(;;){
 
+	cause_hard_fault();
 	CS1_CriticalVariable()
 	CS1_EnterCritical();
 	testcolour();
