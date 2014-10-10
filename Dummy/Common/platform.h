@@ -26,6 +26,7 @@
 	#define PL_HAS_EVENTS 1
 		// FRDM Board supports Events
 	#define PL_HAS_TIMER 1
+	#define PL_NOF_KEYS 7
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()

@@ -41,7 +41,7 @@
 #include "TimerIntLdd1.h"
 #include "TU1.h"
 #include "SW1.h"
-#include "BitIoLdd4.h"
+#include "ExtIntLdd1.h"
 #include "SW2.h"
 #include "BitIoLdd5.h"
 #include "SW3.h"
@@ -86,11 +86,6 @@ int main(void)
 for(;;){
 
 	cause_hard_fault();
-	CS1_CriticalVariable()
-	CS1_EnterCritical();
-	testcolour();
-	CS1_ExitCritical();
-
 
 }
 

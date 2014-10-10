@@ -74,6 +74,25 @@ void TI1_OnInterrupt(void)
   TMR_OnInterrupt();
 }
 
+/*
+** ===================================================================
+**     Event       :  SW1_OnInterrupt (module Events)
+**
+**     Component   :  SW1 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW1_OnInterrupt(void)
+{
+	if(!SW1_GetVal()){
+		KEY_OnInterrupt(KEY_BTN1);
+	}
+}
+
 /* END Events */
 
 #ifdef __cplusplus

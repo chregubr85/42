@@ -24,8 +24,10 @@ void APP_HandleEvent(EVNT_Handle event){
 		LedGREEN_On();
 		break;
 	case EVNT_LED_HEARTBEAT:
-		LedRED_Neg();
-
+		LedGREEN_Neg();
+		break;
+	case  EVNT_BTN_RED:
+		LedBLUE_Neg();
 	default:
 		break;
 
