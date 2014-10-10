@@ -15,11 +15,15 @@
 #endif
 
 void KEY_Scan(void) {
-#if PL_NOF_KEYS >= 1
-  if (KEY1_Get()) { /* key pressed */
-    EVNT_SetEvent(EVNT_BTN_BLUE);
+  if (KEY3_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_BTN_YELLOW);
   }
-#endif
+  if (KEY5_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_BTN_E);
+  }
+  if (KEY6_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_BTN_F);
+  }
   /*! \todo Implement handling of all the other keys */
 }
 
@@ -27,6 +31,12 @@ void KEY_Scan(void) {
 void KEY_OnInterrupt(KEY_Buttons button) {
 	switch (button) {
 		case KEY_BTN1: EVNT_SetEvent(EVNT_BTN_RED);
+			break;
+		case KEY_BTN2: EVNT_SetEvent(EVNT_BTN_BLUE);
+			break;
+		case KEY_BTN4: EVNT_SetEvent(EVNT_BTN_GREEN);
+			break;
+		case KEY_BTN7: EVNT_SetEvent(EVNT_BTN_KEY);
 			break;
 		default:
 			break;

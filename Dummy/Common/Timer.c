@@ -13,7 +13,7 @@
 
 void TMR_OnInterrupt(void) {
   time++;
-  if (time==100){
+  if ((time*TMR_TICK_MS)==1000){
 	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 	  time = 0;
   }

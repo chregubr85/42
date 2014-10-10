@@ -21,6 +21,9 @@ typedef enum EVNT_Handle {
   EVNT_BTN_RED,
   EVNT_BTN_BLUE,
   EVNT_BTN_YELLOW,
+  EVNT_BTN_E,
+  EVNT_BTN_F,
+  EVNT_BTN_KEY,
   EVNT_LED_HEARTBEAT,
   EVNT_NOF_EVENTS      /*!< Must be last one! */
 } EVNT_Handle;

@@ -18,15 +18,14 @@
 
 
 #if  PL_IS_FRDM
-	#define PL_NOF_LEDS 3
-		//FRDM board has 3 LEDs(RGB)
+	#define PL_NOF_LEDS 3		// FRDM board has 3 LEDs(RGB)
 	#define PL_HAS_KEYS 1
 	#define PL_HAS_KBI 1
  	#define PL_HAS_JOYSTICK 1
-	#define PL_HAS_EVENTS 1
-		// FRDM Board supports Events
+	#define PL_HAS_EVENTS 1		// FRDM Board supports Events
 	#define PL_HAS_TIMER 1
 	#define PL_NOF_KEYS 7
+	#define PL_NOF_KBI 4
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()

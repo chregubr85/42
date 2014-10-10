@@ -88,8 +88,66 @@ void TI1_OnInterrupt(void)
 */
 void SW1_OnInterrupt(void)
 {
-	if(!SW1_GetVal()){
+	if(KEY1_Get()){
 		KEY_OnInterrupt(KEY_BTN1);
+	}
+}
+
+/*
+** ===================================================================
+**     Event       :  SW2_OnInterrupt (module Events)
+**
+**     Component   :  SW2 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW2_OnInterrupt(void)
+{
+	if(KEY2_Get()){
+		KEY_OnInterrupt(KEY_BTN2);
+	}
+}
+
+
+/*
+** ===================================================================
+**     Event       :  SW4_OnInterrupt (module Events)
+**
+**     Component   :  SW4 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW4_OnInterrupt(void)
+{
+	if(KEY4_Get()){
+		KEY_OnInterrupt(KEY_BTN4);
+	}
+}
+
+/*
+** ===================================================================
+**     Event       :  SW7_OnInterrupt (module Events)
+**
+**     Component   :  SW7 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW7_OnInterrupt(void)
+{
+	if(KEY7_Get()){
+		KEY_OnInterrupt(KEY_BTN7);
 	}
 }
 

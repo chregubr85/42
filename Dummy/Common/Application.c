@@ -9,11 +9,14 @@
 
 #include "Application.h"
 #include "LED.h"
+#include "Keys.h"
 
 void run_app(void){
 	EVNT_SetEvent(EVNT_INIT) ;
 	for ( ; ; ) {
+		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
+
 	}
 }
 
@@ -28,6 +31,25 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case  EVNT_BTN_RED:
 		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_BLUE:
+		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_YELLOW:
+		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_GREEN:
+		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_E:
+		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_F:
+		LedBLUE_Neg();
+		break;
+	case  EVNT_BTN_KEY:
+		LedBLUE_Neg();
+		break;
 	default:
 		break;
 
