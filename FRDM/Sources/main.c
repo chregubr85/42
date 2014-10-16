@@ -54,6 +54,11 @@
 #include "BitIoLdd9.h"
 #include "SW7.h"
 #include "ExtIntLdd5.h"
+#include "CLS1.h"
+#include "UTIL1.h"
+#include "AS1.h"
+#include "ASerialLdd1.h"
+#include "PTA.h"
 
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
@@ -81,6 +86,7 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
+
   init_platform();
   run_app();
 for(;;){

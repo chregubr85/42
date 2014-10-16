@@ -86,6 +86,9 @@ void TI1_OnInterrupt(void)
 **     Returns     : Nothing
 ** ===================================================================
 */
+
+
+
 void SW1_OnInterrupt(void)
 {
 	if(KEY1_Get()){
