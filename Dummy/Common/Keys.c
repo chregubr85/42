@@ -15,16 +15,12 @@
 #endif
 
 void KEY_Scan(void) {
-  if (KEY3_Get()) { /* key pressed */
-    EVNT_SetEvent(EVNT_BTN_YELLOW);
-  }
   if (KEY5_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_E);
   }
   if (KEY6_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_F);
   }
-  /*! \todo Implement handling of all the other keys */
 }
 
 #if PL_HAS_KBI
@@ -33,6 +29,8 @@ void KEY_OnInterrupt(KEY_Buttons button) {
 		case KEY_BTN1: EVNT_SetEvent(EVNT_BTN_RED);
 			break;
 		case KEY_BTN2: EVNT_SetEvent(EVNT_BTN_BLUE);
+			break;
+		case KEY_BTN3: EVNT_SetEvent(EVNT_BTN_YELLOW);
 			break;
 		case KEY_BTN4: EVNT_SetEvent(EVNT_BTN_GREEN);
 			break;

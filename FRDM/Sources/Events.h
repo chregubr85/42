@@ -49,7 +49,7 @@
 #include "SW2.h"
 #include "ExtIntLdd2.h"
 #include "SW3.h"
-#include "BitIoLdd6.h"
+#include "ExtIntLdd4.h"
 #include "ExtIntLdd3.h"
 #include "SW4.h"
 #include "SW5.h"
@@ -69,22 +69,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif 
-
-/*
-** ===================================================================
-**     Event       :  Cpu_OnNMIINT (module Events)
-**
-**     Component   :  Cpu [MKL25Z128LK4]
-*/
-/*!
-**     @brief
-**         This event is called when the Non maskable interrupt had
-**         occurred. This event is automatically enabled when the [NMI
-**         interrupt] property is set to 'Enabled'.
-*/
-/* ===================================================================*/
-void Cpu_OnNMIINT(void);
-
 
 /*
 ** ===================================================================
@@ -150,6 +134,20 @@ void SW4_OnInterrupt(void);
 **     Event       :  SW4_OnInterrupt (module Events)
 **
 **     Component   :  SW4 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void SW3_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  SW3_OnInterrupt (module Events)
+**
+**     Component   :  SW3 [ExtInt]
 **     Description :
 **         This event is called when an active signal edge/level has
 **         occurred.

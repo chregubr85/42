@@ -37,22 +37,10 @@ extern "C" {
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 
-/*
-** ===================================================================
-**     Event       :  Cpu_OnNMIINT (module Events)
-**
-**     Component   :  Cpu [MKL25Z128LK4]
-*/
-/*!
-**     @brief
-**         This event is called when the Non maskable interrupt had
-**         occurred. This event is automatically enabled when the [NMI
-**         interrupt] property is set to 'Enabled'.
-*/
-/* ===================================================================*/
-void Cpu_OnNMIINT(void)
-{
-  /* Write your code here ... */
+void PORTA_OnInterrupt(void) {
+  void Cpu_ivINT_PORTA(void); /* prototype of ISR in Cpu.c */
+
+  Cpu_ivINT_PORTA(); /* call interrupt handler created by the ExtInt components */
 }
 
 /*
@@ -115,6 +103,36 @@ void SW2_OnInterrupt(void)
 	}
 }
 
+/*
+** ===================================================================
+**     Event       :  SW3_OnInterrupt (module Events)
+**
+**     Component   :  SW3 [ExtInt]
+**     Description :
+**         This event is called when an active signal edge/level has
+**         occurred.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SW3_OnInterrupt(void)
+{
+#if PL_HAS_KBI
+#if 1 /* Problem with Processor Expert and sharing PTA4/NMI interrupt: code below is missing in ExtIntLdd3_OnInterrupt() */
+  /* Check the pin interrupt flag of the shared interrupt */
+  if (PORT_PDD_GetPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd4_PIN_INDEX)) {
+    /* Clear the interrupt flag */
+    PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd4_PIN_INDEX);
+    /* call user event */
+    KEY_OnInterrupt(KEY_BTN3);
+  }
+#else
+  if (KEY3_Get()) {
+    KEY_OnInterrupt(KEY_BTN3);
+  }
+#endif
+#endif
+}
 
 /*
 ** ===================================================================
@@ -153,6 +171,7 @@ void SW7_OnInterrupt(void)
 		KEY_OnInterrupt(KEY_BTN7);
 	}
 }
+
 
 /* END Events */
 
