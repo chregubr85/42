@@ -22,9 +22,9 @@ typedef enum {
   TRG_LED_BLINK,   /*!< LED blinking */
   TRG_BTNLED_OFF,  /*!< Turn LED off */
   TRG_BTNSND_OFF,  /*!< Switch sounder off  */
-
+  TRG_KEYPRESS,    /*!< Trigger for debouncing */
 #if PL_HAS_BUZZER
-  TRG_BUZ_BEEP,    /*!< Trigger fo TRG_KEYPRESS,    /*!< Trigger for debouncing */r buzzer */
+  TRG_BUZ_BEEP,    /*!< Trigger for buzzer */
 #endif
   TRG_NOF_TRIGGERS /*!< Must be last! */
 } TRG_TriggerKind;

@@ -14,7 +14,9 @@
 #include "Event.h"
 
 
-void run_app(void);
+void APP_start(void);
+
+void APP_start(void);
 
 void APP_HandleEvent(EVNT_Handle event);
 

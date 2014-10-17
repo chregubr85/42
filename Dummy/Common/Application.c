@@ -7,14 +7,21 @@
 ** @date 09.10.2014
 */
 
+
 #include "Application.h"
+#include "platform.h"
 #include "LED.h"
 #include "Keys.h"
+#if PL_HAS_SHELL
 #include "CLS1.h"
+#endif
 
-void run_app(void){
+void APP_start(void){
 	EVNT_SetEvent(EVNT_INIT) ;
+	PL_Init();
+
 	for ( ; ; ) {
+		BUZ_Beep(1000,1000);
 		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
 
@@ -25,38 +32,70 @@ void run_app(void){
 void APP_HandleEvent(EVNT_Handle event){
 	switch(event){
 	case EVNT_INIT:
-		LedGREEN_On();
+		#if PL_IS_FRDM
+			LedGREEN_On();
+		#endif
 		break;
 	case EVNT_LED_HEARTBEAT:
-		LedGREEN_Neg();
+		#if PL_IS_FRDM
+			LedGREEN_Neg();
+		#endif
 		break;
 	case  EVNT_BTN_RED:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button Red pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button Red pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_BLUE:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button Blue pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button Blue pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_YELLOW:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button Yellow pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button Yellow pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_GREEN:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button Green pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button Green pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_E:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button E pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button E pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_F:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button F pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button F pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	case  EVNT_BTN_KEY:
-		LedBLUE_Neg();
-		CLS1_SendStr("Button Key pressed\r", CLS1_GetStdio()->stdOut);
+		#if PL_IS_FRDM
+			LedBLUE_Neg();
+		#endif
+		#if PL_HAS_SHELL
+			CLS1_SendStr("Button Key pressed\r", CLS1_GetStdio()->stdOut);
+		#endif
 		break;
 	default:
 		break;

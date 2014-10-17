@@ -69,7 +69,7 @@ void Cpu_OnNMIINT(void)
 */
 void SW1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+
 }
 
 /*
@@ -88,7 +88,7 @@ void SW1_OnInterrupt(void)
 */
 void TI1_OnInterrupt(void)
 {
-  /* Write your code here ... */
+	TMR_OnInterrupt();
 }
 
 /* END Events */

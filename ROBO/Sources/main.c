@@ -42,6 +42,8 @@
 #include "ExtIntLdd1.h"
 #include "BUZ1.h"
 #include "BitIoLdd3.h"
+#include "LedBit2.h"
+#include "BitIoLdd4.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -60,6 +62,7 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
+  APP_start();
   /* For example: for(;;) { } */
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

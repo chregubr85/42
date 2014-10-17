@@ -24,6 +24,8 @@
  	#define PL_HAS_JOYSTICK 1
 	#define PL_HAS_EVENTS 1		// FRDM Board supports Events
 	#define PL_HAS_TIMER 1
+	#define PL_HAS_TRIGGER 1
+	#define PL_HAS_BUZZER 0
 	#define PL_NOF_KEYS 7
 	#define PL_NOF_KBI 4
 
@@ -68,11 +70,24 @@
 
 #elif PL_IS_ROBO
 	#define PL_NOF_LEDS 2
+
+	#define PL_NOF_LEDS 2		// FRDM board has 3 LEDs(RGB)
+	#define PL_HAS_KEYS 1
+	#define PL_HAS_KBI 0
+ 	#define PL_HAS_JOYSTICK 0
+	#define PL_HAS_EVENTS 1		// FRDM Board supports Events
+	#define PL_HAS_TIMER 1
+	#define PL_HAS_TRIGGER 1
+	#define PL_HAS_BUZZER 1
+	#define PL_NOF_KEYS 1
+	#define PL_NOF_KBI 0
+	#define PL_HAS_SHELL 0
 		//robo has 2 LEDs
+
 #else
 	#error "unknown board?"
 #endif
 
-
+void PL_Init(void);
 
 #endif	/*PLATFORM_H_*/
