@@ -2,23 +2,14 @@
 ** @file Application.c
 ** @version 1.0
 ** @brief
-**         ToDo write brief
+**         ToDo write brief an mutti
 ** @author S.Portmann
 ** @date 09.10.2014
 */
 
 
 #include "Application.h"
-#include "platform.h"
-#include "LED.h"
-#include "Keys.h"
-#if PL_HAS_SHELL
-#include "CLS1.h"
-#endif
-#if PL_HAS_BUZZER
-#include "Buzzer.h"
-#endif
-#include "WAIT1.h"
+
 
 void APP_start(void){
 
@@ -45,7 +36,6 @@ void APP_HandleEvent(EVNT_Handle event){
 			LedGREEN_On();
 		#endif
 		BUZ_Beep(40,2000);
-	//	WAIT1_Waitms(1000);
 		break;
 	case EVNT_LED_HEARTBEAT:
 		#if PL_IS_FRDM
@@ -54,7 +44,8 @@ void APP_HandleEvent(EVNT_Handle event){
 			LED1_Neg();
 		break;
 	case  EVNT_BTN:
-
+		MEALY_Step();
+		/*for(int i =0; i < 4; i++){
 			BUZ_Beep(freq,duration);
 			WAIT1_Waitms(duration);
 			BUZ_Beep(2*freq,duration);
@@ -64,6 +55,8 @@ void APP_HandleEvent(EVNT_Handle event){
 			BUZ_Beep(2*freq,duration);
 			WAIT1_Waitms(duration);
 			BUZ_Beep(freq,duration);
+			WAIT1_Waitms(duration);
+		}*/
 			break;
 #if PL_HAS_JOYSTICK
 	case  EVNT_BTN_RED:

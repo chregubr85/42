@@ -28,6 +28,7 @@
 	#define PL_HAS_BUZZER 0
 	#define PL_NOF_KEYS 7
 	#define PL_NOF_KBI 4
+	#define PL_HAS_MEALY 1
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
@@ -82,6 +83,7 @@
 	#define PL_NOF_KEYS 1
 	#define PL_NOF_KBI 1
 	#define PL_HAS_SHELL 0
+	#define  PL_HAS_MEALY 1
 
 #else
 	#error "unknown board?"

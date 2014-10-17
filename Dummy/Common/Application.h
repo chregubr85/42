@@ -11,7 +11,33 @@
 #define __APPLICATION_H_
 
 #include "platform.h"
+
+#if PL_HAS_EVENTS
 #include "Event.h"
+#endif
+
+#include "platform.h"
+#if PL_NOF_LEDS >=1
+#include "LED.h"
+#endif
+
+#if PL_HAS_KEYS
+#include "Keys.h"
+#endif
+
+#if PL_HAS_SHELL
+#include "CLS1.h"
+#endif
+
+#if PL_HAS_BUZZER
+#include "Buzzer.h"
+#endif
+
+#if PL_HAS_MEALY
+#include "Mealy.h"
+#endif
+
+#include "WAIT1.h"
 
 
 void APP_start(void);
