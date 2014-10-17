@@ -30,6 +30,18 @@
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
 #include "Events.h"
+#include "WAIT1.h"
+#include "HF1.h"
+#include "CS1.h"
+#include "LedBit1.h"
+#include "BitIoLdd1.h"
+#include "TI1.h"
+#include "TimerIntLdd2.h"
+#include "TU1.h"
+#include "SW1.h"
+#include "ExtIntLdd1.h"
+#include "BUZ1.h"
+#include "BitIoLdd3.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
