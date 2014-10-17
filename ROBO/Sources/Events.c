@@ -30,13 +30,17 @@
 #include "Cpu.h"
 #include "Events.h"
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif 
 
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
-
+#include "platform.h"
+#if PL_HAS_TIMER
+#include "Timer.h"
+#endif
 /*
 ** ===================================================================
 **     Event       :  Cpu_OnNMIINT (module Events)
@@ -69,9 +73,8 @@ void Cpu_OnNMIINT(void)
 */
 void SW1_OnInterrupt(void)
 {
-
+	KEY_OnInterrupt(KEY_BTN1);
 }
-
 /*
 ** ===================================================================
 **     Event       :  TI1_OnInterrupt (module Events)

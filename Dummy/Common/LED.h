@@ -12,7 +12,7 @@
 #include "platform.h"
 
 #if PL_NOF_LEDS >= 1
-	#if PL_HAS_KEYS == 0
+	#if (PL_HAS_KEYS == 0) | (PL_IS_ROBO)
 		#include "LedBit1.h"
 
   #define LED1_On()     LedBit1_ClrVal()

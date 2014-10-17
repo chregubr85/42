@@ -12,8 +12,8 @@
 #define TMR_TICK_MS  1
   /*!< we get called every 10 ms */
 
-static uint8 time;
-  /*!< we get called every 10 ms */
+static uint16 time;
+
 
 /*! \brief Function called from timer interrupt every TMR_TICK_MS. */
 void TMR_OnInterrupt(void);

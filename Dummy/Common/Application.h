@@ -16,7 +16,7 @@
 
 void APP_start(void);
 
-void APP_start(void);
+void APP_loop(void);
 
 void APP_HandleEvent(EVNT_Handle event);
 

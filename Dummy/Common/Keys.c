@@ -15,17 +15,20 @@
 #endif
 
 void KEY_Scan(void) {
+#if PL_HAS_JOYSTICK
   if (KEY5_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_E);
   }
   if (KEY6_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_F);
   }
+#endif
 }
 
 #if PL_HAS_KBI
 void KEY_OnInterrupt(KEY_Buttons button) {
 	switch (button) {
+#if PL_IS_FRDM & PL_HAS_KBI
 		case KEY_BTN1: EVNT_SetEvent(EVNT_BTN_RED);
 			break;
 		case KEY_BTN2: EVNT_SetEvent(EVNT_BTN_BLUE);
@@ -36,6 +39,9 @@ void KEY_OnInterrupt(KEY_Buttons button) {
 			break;
 		case KEY_BTN7: EVNT_SetEvent(EVNT_BTN_KEY);
 			break;
+#endif
+		case KEY_BTN1: EVNT_SetEvent(EVNT_BTN);
+		break;
 		default:
 			break;
 	}

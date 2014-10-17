@@ -48,6 +48,7 @@
 #include "BitIoLdd3.h"
 #include "LedBit2.h"
 #include "BitIoLdd4.h"
+#include "Keys.h"
 
 #ifdef __cplusplus
 extern "C" {

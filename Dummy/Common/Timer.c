@@ -9,7 +9,7 @@
 #include "platform.h"
 #if PL_HAS_TIMER
 #include "Timer.h"
-#if PL_HAS_EVENT
+#if PL_HAS_EVENTS
 #include "Event.h"
 #endif
 #if PL_HAS_TRIGGER
@@ -19,9 +19,10 @@
 
 void TMR_OnInterrupt(void) {
 
-  time++;
- if ((time*TMR_TICK_MS)==1000){
-#if PL_HAS_EVENT
+ time++;
+ if ((time*TMR_TICK_MS)>=1000){
+
+#if PL_HAS_EVENTS
 	  EVNT_SetEvent(EVNT_LED_HEARTBEAT);
 #endif
 	  time = 0;

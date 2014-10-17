@@ -17,6 +17,7 @@
 
 typedef enum EVNT_Handle {
   EVNT_INIT,            /*!< System Initialization Event */
+#if PL_IS_FRDM & PL_HAS_JOYSTICK
   EVNT_BTN_GREEN,
   EVNT_BTN_RED,
   EVNT_BTN_BLUE,
@@ -24,7 +25,9 @@ typedef enum EVNT_Handle {
   EVNT_BTN_E,
   EVNT_BTN_F,
   EVNT_BTN_KEY,
+#endif
   EVNT_LED_HEARTBEAT,
+  EVNT_BTN,
   EVNT_NOF_EVENTS      /*!< Must be last one! */
 } EVNT_Handle;
 

@@ -16,12 +16,15 @@
 
 typedef enum {
   KEY_BTN1, /*!< button 1 */
+#if PL_IS_FRDM
   KEY_BTN2, /*!< button 2 */
   KEY_BTN3, /*!< button 3 */
   KEY_BTN4, /*!< button 4 */
   KEY_BTN5, /*!< button 5 */
   KEY_BTN6, /*!< button 6 */
   KEY_BTN7  /*!< button 7 */
+#endif
+
 } KEY_Buttons;
 
 #if PL_NOF_KEYS>=1
