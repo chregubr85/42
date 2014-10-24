@@ -29,6 +29,8 @@
 	#define PL_NOF_KEYS 7
 	#define PL_NOF_KBI 4
 	#define PL_HAS_MEALY 1
+	#define PL_HAS_DEBOUNCE 1
+	#define PL_HAS_SHELL 1
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
@@ -66,7 +68,18 @@
 	  #define LedTORQUOISE_Off()	led23Off()
 	  #define LedWHITE_Off()		led123Off()
 
+	#if PL_IS_FRDM
+		#define PL_KEY_POLLED_KEY1    (0)
+  	  	#define PL_KEY_POLLED_KEY2    (0)
+		#define PL_KEY_POLLED_KEY3    (0)
+		#define PL_KEY_POLLED_KEY4    (0)
+		#define PL_KEY_POLLED_KEY5    (1)
+		#define PL_KEY_POLLED_KEY6    (1)
+		#define PL_KEY_POLLED_KEY7    (0)
 
+	#elif PL_IS_ROBO
+  	  	#define PL_KEY_POLLED_KEY1    (0)
+	#endif
 
 
 #elif PL_IS_ROBO

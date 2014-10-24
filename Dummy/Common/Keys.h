@@ -113,6 +113,10 @@ void KEY_Scan(void);
 /*! \brief Get access to key hardware. Use KEY_Close() afterwards. */
 void KEY_Open(void);
 
+void KEY_EnableInterrupts(void);
+
+void KEY_DisableInterrupts(void);
+
 /*! \brief Finish access to key hardware. Called after KEY_Open(). */
 void KEY_Close(void);
 

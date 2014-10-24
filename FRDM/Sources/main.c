@@ -67,7 +67,6 @@
 #include "IO_Map.h"
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "platform.h"
-#include "init_platform.h"
 #include "LED.h"
 #include "LED_FRDM.h"
 #include "Event.h"
@@ -87,8 +86,7 @@ int main(void)
   /* Write your code here */
   /* For example: for(;;) { } */
 
-  init_platform();
-  run_app();
+  APP_start();
 for(;;){
 
 	cause_hard_fault();

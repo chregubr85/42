@@ -34,18 +34,21 @@ void APP_HandleEvent(EVNT_Handle event){
 	case EVNT_INIT:
 		#if PL_IS_FRDM
 			LedGREEN_On();
+		#elif PL_IS_ROBO
+			BUZ_Beep(40,2000);
 		#endif
-		BUZ_Beep(40,2000);
 		break;
 	case EVNT_LED_HEARTBEAT:
 		#if PL_IS_FRDM
 			LedGREEN_Neg();
-		#endif
+		#elif PL_IS_ROBO
 			LED1_Neg();
+		#endif
 		break;
+		#if PL_IS_ROBO
 	case  EVNT_BTN:
 		MEALY_Step();
-		/*for(int i =0; i < 4; i++){
+		for(int i =0; i < 4; i++){
 			BUZ_Beep(freq,duration);
 			WAIT1_Waitms(duration);
 			BUZ_Beep(2*freq,duration);
@@ -56,10 +59,11 @@ void APP_HandleEvent(EVNT_Handle event){
 			WAIT1_Waitms(duration);
 			BUZ_Beep(freq,duration);
 			WAIT1_Waitms(duration);
-		}*/
+		}
 			break;
+		#endif
 #if PL_HAS_JOYSTICK
-	case  EVNT_BTN_RED:
+	case  EVNT_BTN_RED_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -67,7 +71,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button Red pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_BLUE:
+	case  EVNT_BTN_BLUE_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -75,7 +79,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button Blue pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_YELLOW:
+	case  EVNT_BTN_YELLOW_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -83,7 +87,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button Yellow pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_GREEN:
+	case  EVNT_BTN_GREEN_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -91,7 +95,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button Green pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_E:
+	case  EVNT_BTN_E_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -99,7 +103,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button E pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_F:
+	case  EVNT_BTN_F_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
@@ -107,7 +111,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			CLS1_SendStr("Button F pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
 		break;
-	case  EVNT_BTN_KEY:
+	case  EVNT_BTN_KEY_PRESSED:
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#endif
