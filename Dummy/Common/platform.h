@@ -31,6 +31,7 @@
 	#define PL_HAS_MEALY 1
 	#define PL_HAS_DEBOUNCE 1
 	#define PL_HAS_SHELL 1
+	#define PL_HAS_RTOS 1
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()

@@ -37,6 +37,10 @@
 #include "Mealy.h"
 #endif
 
+#if PL_HAS_RTOS
+#include "RTOS.h"
+#endif
+
 #include "WAIT1.h"
 
 

@@ -15,6 +15,8 @@ void APP_start(void){
 
 	PL_Init();
 	EVNT_SetEvent(EVNT_INIT) ;
+	RTOS_Init();
+	RTOS_Run();
 	APP_loop();
 }
 
@@ -40,7 +42,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case EVNT_LED_HEARTBEAT:
 		#if PL_IS_FRDM
-			LedGREEN_Neg();
+			LedBLUE_Neg();
 		#elif PL_IS_ROBO
 			LED1_Neg();
 		#endif

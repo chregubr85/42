@@ -59,6 +59,8 @@
 #include "AS1.h"
 #include "ASerialLdd1.h"
 #include "PTA.h"
+#include "FRTOS1.h"
+#include "RTOSCNTRLDD1.h"
 
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
@@ -85,8 +87,9 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-
+#if !PL_HAS_RTOS
   APP_start();
+#endif
 for(;;){
 
 	cause_hard_fault();
