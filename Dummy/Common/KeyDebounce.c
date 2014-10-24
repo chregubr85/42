@@ -70,12 +70,12 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
     case DBNC_EVENT_PRESSED:
 #if PL_NOF_KEYS >= 1
       if (keys==(1<<0)) {
-        EVNT_SetEvent(EVNT_BTN_GREEN_PRESSED);
+        EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 2
       if (keys==(1<<1)) {
-        EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
+        EVNT_SetEvent(EVNT_BTN_BLUE_PRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 3
@@ -85,7 +85,7 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 #endif
 #if PL_NOF_KEYS >= 4
       if (keys==(1<<3)) {
-        EVNT_SetEvent(EVNT_BTN_BLUE_PRESSED);
+        EVNT_SetEvent(EVNT_BTN_GREEN_PRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 5

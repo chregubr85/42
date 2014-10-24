@@ -21,12 +21,16 @@
 
 void KEY_Scan(void) {
 #if PL_HAS_JOYSTICK
+#if PL_HAS_DEBOUNCE
+	KEYDBNC_Process();
+#else
   if (KEY5_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_E_PRESSED);
   }
   if (KEY6_Get()) { /* key pressed */
     EVNT_SetEvent(EVNT_BTN_F_PRESSED);
   }
+#endif
 #endif
 }
 
