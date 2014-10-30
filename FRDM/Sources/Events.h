@@ -67,6 +67,7 @@
 #include "RTOSCNTRLDD1.h"
 #include "Timer.h"
 #include "Keys.h"
+#include "Trigger.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -87,7 +87,7 @@ int main(void)
 
   /* Write your code here */
   /* For example: for(;;) { } */
-#if !PL_HAS_RTOS
+#if PL_HAS_RTOS
   APP_start();
 #endif
 for(;;){

@@ -10,7 +10,7 @@
 #define TIMER_H_
 
 #define TMR_TICK_MS  1
-  /*!< we get called every 10 ms */
+  /*!< we get called every 1ms */
 
 static uint16 time;
 
