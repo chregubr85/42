@@ -12,7 +12,6 @@
 
 
 void APP_start(void){
-
 	PL_Init();
 	EVNT_SetEvent(EVNT_INIT) ;
 	SHELL_Init();

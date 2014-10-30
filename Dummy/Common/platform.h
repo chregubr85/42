@@ -101,6 +101,7 @@
 	#define PL_NOF_KBI 1
 	#define PL_HAS_SHELL 0
 	#define  PL_HAS_MEALY 1
+	#define PL_HAS_RTOS 1
 
 #else
 	#error "unknown board?"

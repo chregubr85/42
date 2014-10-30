@@ -19,6 +19,7 @@
 
 void TMR_OnInterrupt(void) {
 
+#if !PL_HAS_RTOS
  time++;
  if ((time*TMR_TICK_MS)>=1000){
 
@@ -27,9 +28,9 @@ void TMR_OnInterrupt(void) {
 #endif
 	  time = 0;
  }
-
 #if PL_HAS_TRIGGER
   TRG_IncTick();
+#endif
 #endif
 }
 
