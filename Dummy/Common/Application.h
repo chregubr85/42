@@ -41,6 +41,10 @@
 #include "RTOS.h"
 #endif
 
+#if PL_HAS_SHELL
+#include "Shell.h"
+#endif
+
 #include "WAIT1.h"
 
 
