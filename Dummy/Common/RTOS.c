@@ -12,11 +12,14 @@
 #include "Event.h"
 #include "Application.h"
 #include "Trigger.h"
+#include "Shell.h"
+
+
 
 static portTASK_FUNCTION(T1, pvParameters) {
   for(;;) {
     LED2_Neg();
-    FRTOS1_vTaskDelay(1000*TRG_TICKS_MS);
+    FRTOS1_vTaskDelay(1000/TRG_TICKS_MS);
   }
 }
 
