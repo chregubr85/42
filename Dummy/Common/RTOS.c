@@ -11,6 +11,8 @@
 #include "LED.h"
 #include "Event.h"
 #include "Application.h"
+#include "Shell.h"
+
 
 static portTASK_FUNCTION(T1, pvParameters) {
   for(;;) {
@@ -40,6 +42,7 @@ void RTOS_Init(void) {
      for(;;){} /* error */
    }
 }
+
 
 void RTOS_Deinit(void) {
 }
