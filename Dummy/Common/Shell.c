@@ -53,6 +53,14 @@ static uint8_t SHELL_PrintStatus(const CLS1_StdIOType *io) {
   return ERR_OK;
 }
 
+static uint8_t SHELL_PrintConversation(const CLS1_StdIOType *io) {
+  CLS1_SendStr("Was geht?",io->stdOut);
+  return ERR_OK;
+}
+
+
+
+
 static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io) {
   uint32_t val;
   const unsigned char *p;
@@ -69,7 +77,11 @@ static uint8_t SHELL_ParseCommand(const unsigned char *cmd, bool *handled, const
       SHELL_val = val;
       *handled = TRUE;
     }
-  }
+  }else if (UTIL1_strcmp((char*)cmd, "Conversation")==0){
+    *handled = TRUE;
+    return SHELL_PrintConversation(io);
+    }
+
   return ERR_OK;
 }
 
