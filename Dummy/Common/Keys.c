@@ -69,6 +69,8 @@ void KEY_EnableInterrupts(void) {
 #endif
 #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY3
   SW3_Enable();
+  PORT_PDD_ClearPinInterruptFlag(PORTA_BASE_PTR, ExtIntLdd4_PIN_INDEX);
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR, 4, PORT_PDD_DMA_ON_FALLING);
 #endif
 #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY4
   SW4_Enable();
@@ -93,6 +95,7 @@ void KEY_DisableInterrupts(void) {
 #endif
 #if PL_NOF_KEYS >= 3 && !PL_KEY_POLLED_KEY3
   SW3_Disable();
+  PORT_PDD_SetPinInterruptConfiguration(PORTA_BASE_PTR, 4, PORT_PDD_INTERRUPT_DMA_DISABLED);
 #endif
 #if PL_NOF_KEYS >= 4 && !PL_KEY_POLLED_KEY4
   SW4_Disable();

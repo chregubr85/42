@@ -16,7 +16,6 @@ void APP_start(void){
 	EVNT_SetEvent(EVNT_INIT) ;
 	RTOS_Init();
 	RTOS_Run();
-	APP_loop();
 }
 
 void APP_loop(void){
