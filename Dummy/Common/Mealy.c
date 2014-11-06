@@ -38,7 +38,7 @@ void MEALY_Step(void){
 		break;
 	case StateThree:
 		for(int i = 0; i<20; i++){
-			LED2_Neg();
+			LED1_Neg();
 			WAIT1_Waitms(100);
 		}
 		MyState = StateInit;

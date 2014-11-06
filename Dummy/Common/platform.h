@@ -32,7 +32,6 @@
 	#define PL_HAS_DEBOUNCE 1
 	#define PL_HAS_SHELL 1
 	#define PL_HAS_RTOS 1
-	#define PL_HAS_SHELL 1
 	#define PL_HAS_BLUETOOTH 0
 	#define PL_HAS_USB_CDC 1
 
@@ -99,9 +98,11 @@
 	#define PL_HAS_BUZZER 1
 	#define PL_NOF_KEYS 1
 	#define PL_NOF_KBI 1
-	#define PL_HAS_SHELL 0
+	#define PL_HAS_SHELL 1
 	#define  PL_HAS_MEALY 1
 	#define PL_HAS_RTOS 1
+	#define PL_HAS_USB_CDC 1
+	#define PL_HAS_BLUETOOTH 1
 
 #else
 	#error "unknown board?"

@@ -9,8 +9,12 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
+#if PL_IS_FRDM
 #define TMR_TICK_MS  10
   /*!< we get called every 10ms */
+#elif PL_IS_ROBO
+#define TMR_TICK_MS  1
+#endif
 
 static uint16 time;
 

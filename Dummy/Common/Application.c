@@ -14,9 +14,15 @@
 void APP_start(void){
 	PL_Init();
 	EVNT_SetEvent(EVNT_INIT) ;
+#if PL_HAS_SHELL
 	SHELL_Init();
+#endif
+#if PL_HAS_RTOS
 	RTOS_Init();
 	RTOS_Run();
+#else
+	APP_loop();
+#endif
 }
 
 void APP_loop(void){
