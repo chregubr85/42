@@ -13,6 +13,7 @@
 #include "Application.h"
 #include "Trigger.h"
 #include "Shell.h"
+#include "Sem.h"
 
 
 
@@ -40,9 +41,9 @@ void RTOS_Init(void) {
   if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error */
   }
-  if (FRTOS1_xTaskCreate(App_loop, (signed portCHAR *)"App_loop", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
-     for(;;){} /* error */
-   }
+  if (FRTOS1_xTaskCreate(App_loop, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+      for(;;){} /* error */
+    }
 }
 
 void RTOS_Deinit(void) {

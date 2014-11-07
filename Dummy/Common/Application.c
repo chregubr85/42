@@ -19,7 +19,11 @@ void APP_start(void){
 #endif
 #if PL_HAS_RTOS
 	RTOS_Init();
+	SEM_Init();
 	RTOS_Run();
+	#if PL_HAS_SEMAPHORE
+
+	#endif
 #else
 	APP_loop();
 #endif

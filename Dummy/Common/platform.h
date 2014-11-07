@@ -103,6 +103,7 @@
 	#define PL_HAS_RTOS 1
 	#define PL_HAS_USB_CDC 1
 	#define PL_HAS_BLUETOOTH 1
+	#define PL_HAS_SEMAPHORE 1
 
 #else
 	#error "unknown board?"
