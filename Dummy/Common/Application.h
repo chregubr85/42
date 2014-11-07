@@ -45,6 +45,10 @@
 #include "Shell.h"
 #endif
 
+#if PL_HAS_SHELL_QUEUE
+	#include "ShellQueue.h"
+#endif
+
 #include "WAIT1.h"
 
 

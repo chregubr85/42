@@ -33,4 +33,7 @@ void SQUEUE_Init(void);
 /*! \brief Deinitializes the queue module */
 void SQUEUE_Deinit(void);
 
+void QUEUE_SendMessage(const unsigned char *msg);
+
+
 #endif /* SHELL_QUEUE_C_ */

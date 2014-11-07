@@ -10,6 +10,7 @@
 #if PL_HAS_SHELL_QUEUE
 #include "ShellQueue.h"
 #include "FRTOS1.h"
+#include "Trigger.h"
 
 static xQueueHandle SQUEUE_Queue;
 
@@ -27,7 +28,20 @@ void SQUEUE_SendString(const unsigned char *str) {
 }
 
 unsigned char SQUEUE_ReceiveChar(void) {
+
+#if 0
   /*! \todo Implement function */
+#else
+  unsigned char ch;
+  portBASE_TYPE res;
+
+  res = FRTOS1_xQueueReceive(SQUEUE_Queue, &ch, 0);
+  if (res==errQUEUE_EMPTY) {
+    return '\0';
+  } else {
+    return ch;
+  }
+#endif
 }
 
 unsigned short SQUEUE_NofElements(void) {
@@ -44,4 +58,12 @@ void SQUEUE_Init(void) {
     for(;;){} /* out of memory? */
   }
 }
+
+void QUEUE_SendMessage(const unsigned char *msg) {
+	FRTOS1_xQueueSendToBack(SQUEUE_Queue, msg, 0/TRG_TICKS_MS);
+
+}
+
+
+
 #endif /* PL_HAS_SHELL_QUEUE */

@@ -17,6 +17,9 @@ void APP_start(void){
 #if PL_HAS_SHELL
 	SHELL_Init();
 #endif
+#if PL_HAS_SHELL_QUEUE
+	SQUEUE_Init();
+#endif
 #if PL_HAS_RTOS
 	RTOS_Init();
 	RTOS_Run();
