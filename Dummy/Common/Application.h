@@ -51,6 +51,10 @@
 
 #include "WAIT1.h"
 
+#if PL_HAS_SEMAPHORE
+#include "Sem.h"
+#endif
+
 
 void APP_start(void);
 
