@@ -69,9 +69,15 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
     /* pressed */
     case DBNC_EVENT_PRESSED:
 #if PL_NOF_KEYS >= 1
-      if (keys==(1<<0)) {
-        EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
-      }
+	#if PL_IS_FRDM
+		  if (keys==(1<<0)) {
+			EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
+		  }
+	#elif PL_IS_ROBO
+		  if (keys==(1<<0)) {
+				 EVNT_SetEvent(EVNT_BTN);
+			   }
+	#endif
 #endif
 #if PL_NOF_KEYS >= 2
       if (keys==(1<<1)) {
@@ -107,14 +113,20 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 
     /* long pressed */
     case DBNC_EVENT_LONG_PRESSED:
-#if PL_NOF_KEYS >= 1
-      if (keys==(1<<0)) {
-        EVNT_SetEvent(EVNT_BTN_GREEN_LPRESSED);
-      }
+#if  PL_NOF_KEYS >= 1
+	#if PL_IS_FRDM
+		  if (keys==(1<<0)) {
+			EVNT_SetEvent(EVNT_BTN_RED_LPRESSED);
+		  }
+	#elif PL_IS_ROBO
+		  if (keys==(1<<0)) {
+				EVNT_SetEvent(EVNT_BTN_LPRESSED);
+			  }
+	#endif
 #endif
 #if PL_NOF_KEYS >= 2
       if (keys==(1<<1)) {
-        EVNT_SetEvent(EVNT_BTN_RED_LPRESSED);
+        EVNT_SetEvent(EVNT_BTN_BLUE_LPRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 3
@@ -124,7 +136,7 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 #endif
 #if PL_NOF_KEYS >= 4
      if (keys==(1<<3)) {
-        EVNT_SetEvent(EVNT_BTN_BLUE_LPRESSED);
+        EVNT_SetEvent(EVNT_BTN_GREEN_LPRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 5
@@ -147,13 +159,19 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
      /* released */
     case DBNC_EVENT_RELEASED:
 #if PL_NOF_KEYS >= 1
-      if (keys==(1<<0)) {
-        EVNT_SetEvent(EVNT_BTN_GREEN_RELEASED);
-      }
+	#if PL_IS_FRDM
+		  if (keys==(1<<0)) {
+			EVNT_SetEvent(EVNT_BTN_RED_RELEASED);
+		  }
+	#elif PL_IS_ROBO
+		  if (keys==(1<<0)) {
+				 EVNT_SetEvent(EVNT_BTN_RELEASED);
+			   }
+	#endif
 #endif
 #if PL_NOF_KEYS >= 2
       if (keys==(1<<1)) {
-        EVNT_SetEvent(EVNT_BTN_RED_RELEASED);
+        EVNT_SetEvent(EVNT_BTN_BLUE_RELEASED);
       }
 #endif
 #if PL_NOF_KEYS >= 3
@@ -163,7 +181,7 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 #endif
 #if PL_NOF_KEYS >= 4
       if (keys==(1<<3)) {
-        EVNT_SetEvent(EVNT_BTN_BLUE_RELEASED);
+        EVNT_SetEvent(EVNT_BTN_GREEN_RELEASED);
       }
 #endif
 #if PL_NOF_KEYS >= 5

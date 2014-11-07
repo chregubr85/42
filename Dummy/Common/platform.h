@@ -106,6 +106,8 @@
 	#define PL_HAS_BLUETOOTH 1
 	#define PL_HAS_SHELL_QUEUE 1
 	#define PL_HAS_SEMAPHORE 1
+	#define PL_HAS_LINE_SENSOR 1
+	#define PL_HAS_DEBOUNCE 1
 
 
 #else

@@ -20,6 +20,9 @@ void APP_start(void){
 #if PL_HAS_SHELL_QUEUE
 	SQUEUE_Init();
 #endif
+#if PL_HAS_LINE_SENSOR
+	REF_Init();
+#endif
 #if PL_HAS_RTOS
 	RTOS_Init();
 	SEM_Init();
@@ -74,6 +77,12 @@ void APP_HandleEvent(EVNT_Handle event){
 			BUZ_Beep(freq,duration);
 			WAIT1_Waitms(duration);
 		}
+			break;
+	case EVNT_BTN_LPRESSED:
+#if PL_HAS_LINE_SENSOR
+		EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION) ;
+#endif
+
 			break;
 		#endif
 #if PL_HAS_JOYSTICK

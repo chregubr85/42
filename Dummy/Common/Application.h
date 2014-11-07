@@ -55,6 +55,10 @@
 #include "Sem.h"
 #endif
 
+#if PL_HAS_LINE_SENSOR
+	#include "Reflectance.h"
+#endif
+
 
 void APP_start(void);
 
