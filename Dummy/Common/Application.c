@@ -23,6 +23,9 @@ void APP_start(void){
 #if PL_HAS_LINE_SENSOR
 	REF_Init();
 #endif
+#if PL_HAS_MOTOR
+	MOT_Init();
+#endif
 
 #if PL_HAS_RTOS
 	RTOS_Init();
@@ -85,10 +88,15 @@ void APP_HandleEvent(EVNT_Handle event){
 			break;
 	case EVNT_BTN_LPRESSED:
 		#if PL_HAS_LINE_SENSOR
-		EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION) ;
-			#endif
+			EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION) ;
+		#endif
 	#endif
 			break;
+#if PL_HAS_MOTOR
+	case EVNT_DONT_FALL_DOWN:
+
+		break;
+#endif
 #if PL_HAS_JOYSTICK
 	case  EVNT_BTN_RED_PRESSED:
 		#if PL_IS_FRDM

@@ -88,6 +88,10 @@ typedef enum EVNT_Handle {
 	  EVNT_REF_START_STOP_CALIBRATION,
 #endif
 
+#if PL_HAS_MOTOR
+	  EVNT_DONT_FALL_DOWN,
+#endif
+
   EVNT_LED_HEARTBEAT,
   EVNT_NOF_EVENTS      /*!< Must be last one! */
 } EVNT_Handle;

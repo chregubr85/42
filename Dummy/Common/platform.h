@@ -108,6 +108,7 @@
 	#define PL_HAS_SEMAPHORE 1
 	#define PL_HAS_LINE_SENSOR 1
 	#define PL_HAS_DEBOUNCE 1
+	#define PL_HAS_MOTOR 1
 
 
 #else

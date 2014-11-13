@@ -24,8 +24,9 @@
 #include "Event.h"
 #include "Shell.h"
 #include "Trigger.h"
-
-
+#if PL_HAS_MOTOR
+	#include "Motor.h"
+#endif
 #define REF_NOF_SENSORS 6 /* number of sensors */
 
 #define THRESHOLD_BLK 10 /* Threshold for firing Allert */
@@ -143,7 +144,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   LED_IR_Off();
 }
 
-int REF_Danger(void){
+void REF_Danger(void){
 	int i = 0;
 	uint8_t sensor = 0;
 	unsigned char* temp;
@@ -152,14 +153,15 @@ int REF_Danger(void){
 
 			if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0){
 				sensor = i;
-				/* Set allert!!! */
-				SHELL_SendString((unsigned char*)"ALLERT SENSOR: ");
+				/* Set alert!!! */
+				 /*SHELL_SendString((unsigned char*)"ALERT SENSOR: ");
 				 CLS1_SendNum8u(sensor, CLS1_GetStdio()->stdOut);
-				 SHELL_SendString((unsigned char*)"\r\n ");
-				return sensor;
+				 SHELL_SendString((unsigned char*)"\r\n ");*/
+				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
+				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
 		}
 	}
-	return;
 }
 
 

@@ -67,6 +67,9 @@
 	#include "FRTOS1.h"
 #endif
 
+#if PL_HAS_MOTOR
+	#include "Motor.h"
+#endif
 void APP_start(void);
 
 void APP_loop(void);

@@ -39,7 +39,7 @@ void REF_Deinit(void);
  */
 void REF_Init(void);
 
-int REF_Danger(void);
+void REF_Danger(void);
 
 #endif /* PL_HAS_LINE_SENSOR */
 

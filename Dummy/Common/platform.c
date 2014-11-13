@@ -33,6 +33,9 @@
   #include "Debounce.h"
   #include "KeyDebounce.h"
 #endif
+#if PL_HAS_MOTOR
+	#include "Motor.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -87,5 +90,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_LED
   LED_Deinit();
+#endif
+#if PL_HAS_MOTOR
+  MOT_Deinit();
 #endif
 }
