@@ -18,7 +18,6 @@
 
 /*! \brief Triggers which can be used from the application */
 typedef enum {
-  /*! \todo Extend the list of triggers as needed */
   TRG_LED_BLINK,   /*!< LED blinking */
   TRG_BTNLED_OFF,  /*!< Turn LED off */
   TRG_BTNSND_OFF,  /*!< Switch sounder off  */

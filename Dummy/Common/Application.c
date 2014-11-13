@@ -2,7 +2,7 @@
 ** @file Application.c
 ** @version 1.0
 ** @brief
-**         ToDo write brief an mutti
+**
 ** @author S.Portmann
 ** @date 09.10.2014
 */
@@ -23,13 +23,13 @@ void APP_start(void){
 #if PL_HAS_LINE_SENSOR
 	REF_Init();
 #endif
+
 #if PL_HAS_RTOS
 	RTOS_Init();
-	SEM_Init();
-	RTOS_Run();
 	#if PL_HAS_SEMAPHORE
-
+		SEM_Init();
 	#endif
+	RTOS_Run();
 #else
 	APP_loop();
 #endif
@@ -59,32 +59,36 @@ void APP_HandleEvent(EVNT_Handle event){
 		#if PL_IS_FRDM
 			LedBLUE_Neg();
 		#elif PL_IS_ROBO
-			LED1_Neg();
+			LED2_Neg();
 		#endif
 		break;
 		#if PL_IS_ROBO
 	case  EVNT_BTN:
-		MEALY_Step();
+	//	MEALY_Step();
 		for(int i =0; i < 4; i++){
 			BUZ_Beep(freq,duration);
-			WAIT1_Waitms(duration);
+			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
+			//WAIT1_Waitms(duration);
 			BUZ_Beep(2*freq,duration);
-			WAIT1_Waitms(duration);
+			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
+			//WAIT1_Waitms(duration);
 			BUZ_Beep(4*freq,duration);
-			WAIT1_Waitms(duration);
+			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
+			//WAIT1_Waitms(duration);
 			BUZ_Beep(2*freq,duration);
-			WAIT1_Waitms(duration);
+			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
+			//WAIT1_Waitms(duration);
 			BUZ_Beep(freq,duration);
-			WAIT1_Waitms(duration);
+			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
+			//WAIT1_Waitms(duration);
 		}
 			break;
 	case EVNT_BTN_LPRESSED:
-#if PL_HAS_LINE_SENSOR
+		#if PL_HAS_LINE_SENSOR
 		EVNT_SetEvent(EVNT_REF_START_STOP_CALIBRATION) ;
-#endif
-
+			#endif
+	#endif
 			break;
-		#endif
 #if PL_HAS_JOYSTICK
 	case  EVNT_BTN_RED_PRESSED:
 		#if PL_IS_FRDM

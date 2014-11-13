@@ -18,7 +18,7 @@ static xQueueHandle SQUEUE_Queue;
 #define SQUEUE_ITEM_SIZE   1  /* each item is a single character */
 
 void SQUEUE_SendString(const unsigned char *str) {
-  /*! \todo Implement function */
+
   while(*str!='\0') {
     if (FRTOS1_xQueueSendToBack(SQUEUE_Queue, str, portMAX_DELAY)!=pdPASS) {
       for(;;){} /* ups? */
@@ -30,7 +30,6 @@ void SQUEUE_SendString(const unsigned char *str) {
 unsigned char SQUEUE_ReceiveChar(void) {
 
 #if 0
-  /*! \todo Implement function */
 #else
   unsigned char ch;
   portBASE_TYPE res;

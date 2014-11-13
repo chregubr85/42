@@ -2,7 +2,7 @@
 ** @file Mealy.h
 ** @version 1.0
 ** @brief
-**         ToDo write brief an mutti
+**
 ** @author C.Brunner
 ** @date 09.10.2014
 */

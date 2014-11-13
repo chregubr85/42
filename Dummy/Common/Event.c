@@ -6,7 +6,6 @@
  * This module implements a generic event driver. We are using numbered events starting with zero.
  * EVNT_HandleEvent() can be used to process the pending events. Note that the event with the number zero
  * has the highest priority and will be handled first.
- * \todo Make this module reentrant and thread safe!
  */
 
 #include "platform.h"

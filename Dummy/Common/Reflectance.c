@@ -25,7 +25,10 @@
 #include "Shell.h"
 #include "Trigger.h"
 
+
 #define REF_NOF_SENSORS 6 /* number of sensors */
+
+#define THRESHOLD_BLK 10 /* Threshold for firing Allert */
 
 typedef enum {
   REF_STATE_INIT,
@@ -116,13 +119,21 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   for(i=0;i<REF_NOF_SENSORS;i++) {
     SensorFctArray[i].SetInput(); /* turn I/O line as input */
   }
+  int cntTimeOUt = 0;
   do {
-    /*! \todo Be aware that this might block for a long time, if discharging takes long. Consider using a timeout. */
+
     cnt = 0;
+
     for(i=0;i<REF_NOF_SENSORS;i++) {
       if (raw[i]==MAX_SENSOR_VALUE) { /* not measured yet? */
         if (SensorFctArray[i].GetVal()==0) {
-          raw[i] = RefCnt_GetCounterValue(timerHandle);
+        	FRTOS1_taskENTER_CRITICAL();
+        	raw[i] = RefCnt_GetCounterValue(timerHandle);
+        	FRTOS1_taskEXIT_CRITICAL();
+        }
+        cntTimeOUt++;
+        if(cntTimeOUt >= 500*REF_NOF_SENSORS){
+      	  return;
         }
       } else { /* have value */
         cnt++;
@@ -131,6 +142,26 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   } while(cnt!=REF_NOF_SENSORS);
   LED_IR_Off();
 }
+
+int REF_Danger(void){
+	int i = 0;
+	uint8_t sensor = 0;
+	unsigned char* temp;
+
+	for( i=0;i<REF_NOF_SENSORS;i++) {
+
+			if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0){
+				sensor = i;
+				/* Set allert!!! */
+				SHELL_SendString((unsigned char*)"ALLERT SENSOR: ");
+				 CLS1_SendNum8u(sensor, CLS1_GetStdio()->stdOut);
+				 SHELL_SendString((unsigned char*)"\r\n ");
+				return sensor;
+		}
+	}
+	return;
+}
+
 
 static void REF_CalibrateMinMax(SensorTimeType min[REF_NOF_SENSORS], SensorTimeType max[REF_NOF_SENSORS], SensorTimeType raw[REF_NOF_SENSORS]) {
   int i;
@@ -162,7 +193,9 @@ static void ReadCalibrated(SensorTimeType calib[REF_NOF_SENSORS], SensorTimeType
     } else if (x>1000) {
       x = 1000;
     }
-    calib[i] = x;
+    FRTOS1_taskENTER_CRITICAL();
+    	calib[i] = x;
+    FRTOS1_taskEXIT_CRITICAL();
   }
 }
 
@@ -270,14 +303,14 @@ static void REF_StateMachine(void) {
       
     case REF_STATE_NOT_CALIBRATED:
       REF_MeasureRaw(SensorRaw);
-      /*! \todo Add a new event to your event module...*/
+
       if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
         EVNT_ClearEvent(EVNT_REF_START_STOP_CALIBRATION);
         refState = REF_STATE_START_CALIBRATION;
         break;
       }
       break;
-    
+
     case REF_STATE_START_CALIBRATION:
       SHELL_SendString((unsigned char*)"start calibration...\r\n");
       for(i=0;i<REF_NOF_SENSORS;i++) {

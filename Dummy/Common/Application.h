@@ -2,7 +2,7 @@
 ** @file Application.h
 ** @version 1.0
 ** @brief
-**         ToDO: write brief
+**
 ** @author S.Portmann
 ** @date 03.10.2014
 */
@@ -59,6 +59,13 @@
 	#include "Reflectance.h"
 #endif
 
+#if PL_HAS_TRIGGER
+	#include "Trigger.h"
+#endif
+
+#if PL_HAS_RTOS
+	#include "FRTOS1.h"
+#endif
 
 void APP_start(void);
 

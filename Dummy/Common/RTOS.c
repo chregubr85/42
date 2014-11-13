@@ -19,7 +19,7 @@
 
 static portTASK_FUNCTION(T1, pvParameters) {
   for(;;) {
-    LED2_Neg();
+	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
     FRTOS1_vTaskDelay(1000/TRG_TICKS_MS);
   }
 }
@@ -28,6 +28,8 @@ static portTASK_FUNCTION(App_loop, pvParameters) {
   for(;;) {
 		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
+		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
+		REF_Danger();
   }
 }
 
@@ -37,11 +39,11 @@ void RTOS_Run(void) {
 }
 
 void RTOS_Init(void) {
-  /*! \todo Add tasks here */
+
   if (FRTOS1_xTaskCreate(T1, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
     for(;;){} /* error */
   }
-  if (FRTOS1_xTaskCreate(App_loop, (signed portCHAR *)"T1", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
+  if (FRTOS1_xTaskCreate(App_loop, (signed portCHAR *)"App_loop", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
       for(;;){} /* error */
     }
 }

@@ -103,6 +103,11 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
   BT1_ParseCommand,
 #endif
 #endif
+#if PL_HAS_LINE_SENSOR
+  #if REF_PARSE_COMMAND_ENABLED
+  REF_ParseCommand,
+  #endif
+#endif
   NULL /* Sentinel */
 };
 
@@ -176,7 +181,7 @@ static portTASK_FUNCTION(ShellTask, pvParameters) {
 #endif
 #if PL_HAS_SHELL_QUEUE
     {
-      /*! \todo Handle shell queue */
+
       unsigned char ch;
 
       while((ch=SQUEUE_ReceiveChar()) && ch!='\0') {
