@@ -28,8 +28,11 @@ static portTASK_FUNCTION(App_loop, pvParameters) {
   for(;;) {
 		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
-		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
+#if PL_HAS_LINE_SENSOR
 		REF_Danger();
+#endif
+		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
+
   }
 }
 

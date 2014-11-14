@@ -153,14 +153,16 @@ void REF_Danger(void){
 
 			if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0){
 				sensor = i;
-				/* Set alert!!! */
-				 /*SHELL_SendString((unsigned char*)"ALERT SENSOR: ");
-				 CLS1_SendNum8u(sensor, CLS1_GetStdio()->stdOut);
-				 SHELL_SendString((unsigned char*)"\r\n ");*/
+
 				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
 				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
 		}
+/*			else if(SensorRaw[i] > 0xfffe ){
+				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
+				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
+			}*/
 	}
 }
 

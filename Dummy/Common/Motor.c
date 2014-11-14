@@ -51,7 +51,6 @@ uint16_t MOT_GetVal(MOT_MotorDevice *motor) {
 }
 
 void MOT_SetSpeedPercent(MOT_MotorDevice *motor, MOT_SpeedPercent percent) {
-  /*! \todo See lab guide about this function */
   uint32_t val;
 
   if (percent>100) { /* make sure we are within 0..100 */
@@ -185,18 +184,16 @@ uint8_t MOT_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_Std
       res = ERR_FAILED;
     }
   }
-  //
-
-  else if (UTIL1_strcmp((char*)cmd, (char*)"motor R&L backward")==0) {
+  else if (UTIL1_strcmp((char*)cmd, (char*)"motor L&R backward")==0) {
      MOT_SetDirection(&motorR, MOT_DIR_BACKWARD);
      MOT_SetDirection(&motorL, MOT_DIR_BACKWARD);
      *handled = TRUE;
-   } else if (UTIL1_strcmp((char*)cmd, (char*)"motor R&L forward")==0) {
+   } else if (UTIL1_strcmp((char*)cmd, (char*)"motor L&R forward")==0) {
 	     MOT_SetDirection(&motorR, MOT_DIR_FORWARD);
 	     MOT_SetDirection(&motorL, MOT_DIR_FORWARD);
 	     *handled = TRUE;
-   } else if (UTIL1_strncmp((char*)cmd, (char*)"motor R&L duty ", sizeof("motor R&L duty ")-1)==0) {
-     p = cmd+sizeof("motor R&L duty");
+   } else if (UTIL1_strncmp((char*)cmd, (char*)"motor L&R duty ", sizeof("motor L&R duty ")-1)==0) {
+     p = cmd+sizeof("motor L&R duty");
      if (UTIL1_xatoi(&p, &val)==ERR_OK && val >=-100 && val<=100) {
        MOT_SetSpeedPercent(&motorL, (MOT_SpeedPercent)val);
        MOT_SetSpeedPercent(&motorR, (MOT_SpeedPercent)val);
@@ -206,7 +203,6 @@ uint8_t MOT_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_Std
        res = ERR_FAILED;
      }
    }
-  //
   return res;
 }
 #endif /* PL_HAS_SHELL */

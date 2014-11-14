@@ -109,7 +109,9 @@
 	#define PL_HAS_LINE_SENSOR 1
 	#define PL_HAS_DEBOUNCE 1
 	#define PL_HAS_MOTOR 1
-
+	#define PL_HAS_QUAD_CALIBRATION 1
+	#define PL_HAS_MPC4728 1
+	#define PL_IS_CALIBRATED 1
 
 #else
 	#error "unknown board?"

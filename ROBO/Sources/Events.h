@@ -81,6 +81,27 @@
 #include "PwmLdd1.h"
 #include "PWML.h"
 #include "PwmLdd2.h"
+#include "TU_MPC4728.h"
+#include "TU_QuadInt.h"
+#include "MPC4728_LDAC.h"
+#include "BitIoLdd16.h"
+#include "MPC4728_RDY.h"
+#include "BitIoLdd17.h"
+#include "Q4CLeft.h"
+#include "C11.h"
+#include "BitIoLdd18.h"
+#include "C21.h"
+#include "BitIoLdd19.h"
+#include "Q4CRight.h"
+#include "C12.h"
+#include "BitIoLdd21.h"
+#include "C23.h"
+#include "BitIoLdd22.h"
+#include "QuadInt.h"
+#include "TimerIntLdd1.h"
+#include "TMOUT1.h"
+#include "I2C1.h"
+#include "GI2C1.h"
 #include "UTIL1.h"
 #include "Keys.h"
 
@@ -188,6 +209,50 @@ void FRTOS1_vApplicationMallocFailedHook(void);
 **     Description :
 **         If enabled, the RTOS will call this hook in case memory
 **         allocation failed.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+/*
+** ===================================================================
+**     Event       :  QuadInt_OnInterrupt (module Events)
+**
+**     Component   :  QuadInt [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void QuadInt_OnInterrupt(void);
+
+void GI2C1_OnRequestBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnRequestBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called before accessing the I2C bus.
+**         Useful for starting a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnReleaseBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnReleaseBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called after accessing the I2C bus.
+**         Useful for ending a critical section.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
