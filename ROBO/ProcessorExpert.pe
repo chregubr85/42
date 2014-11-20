@@ -3,7 +3,7 @@
   <Header>
     <Name>ROBO</Name>
     <SavedBy>Christian</SavedBy>
-    <ModificationStamp>58</ModificationStamp>
+    <ModificationStamp>59</ModificationStamp>
     <Date>2014-11-20</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.10.0.RT6_b1428-0121</PEversion>
@@ -29,7 +29,7 @@
     <UseExistingModules>true</UseExistingModules>
     <RenamePeripheries>false</RenamePeripheries>
     <Autodependency>true</Autodependency>
-    <ProjectCompNumb>202</ProjectCompNumb>
+    <ProjectCompNumb>205</ProjectCompNumb>
     <DelUnusedPreviouslyGenFiles>true</DelUnusedPreviouslyGenFiles>
     <GeneratedCodeFrozen>false</GeneratedCodeFrozen>
     <AssignInitComponentNameToPrph>true</AssignInitComponentNameToPrph>
@@ -10587,7 +10587,7 @@
           <ItemSymbol>C_MemoryArea3</ItemSymbol>
           <ReadOnly>false</ReadOnly>
           <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-          <Expanded>false</Expanded>
+          <Expanded>true</Expanded>
         </ItemState>
         <ItemState>
           <ItemSymbol>C_RomRamArea3</ItemSymbol>
@@ -10653,7 +10653,7 @@
           <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
           <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
           <Value>true</Value>
-          <Expanded>false</Expanded>
+          <Expanded>true</Expanded>
         </ItemState>
         <ItemState>
           <ItemSymbol>C_RomRamName4</ItemSymbol>
@@ -10703,7 +10703,7 @@
           <ItemSymbol>C_MemoryArea5</ItemSymbol>
           <ReadOnly>false</ReadOnly>
           <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
-          <Expanded>false</Expanded>
+          <Expanded>true</Expanded>
         </ItemState>
         <ItemState>
           <ItemSymbol>C_RomRamArea5</ItemSymbol>
@@ -10711,7 +10711,7 @@
           <PropertyModelIsAutomatic>false</PropertyModelIsAutomatic>
           <ItemWasNeverEnabledInChgScript>true</ItemWasNeverEnabledInChgScript>
           <Value>true</Value>
-          <Expanded>false</Expanded>
+          <Expanded>true</Expanded>
         </ItemState>
         <ItemState>
           <ItemSymbol>C_RomRamName5</ItemSymbol>

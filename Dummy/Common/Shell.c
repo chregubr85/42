@@ -8,28 +8,33 @@
 
 #include "Platform.h"
 #if PL_HAS_SHELL
-#include "Shell.h"
-#include "CLS1.h"
-#include "Application.h"
-#include "FRTOS1.h"
-#if PL_HAS_USB_CDC
-  #include "USB1.h"
-#endif
-#if PL_HAS_BLUETOOTH
-  #include "BT1.h"
-#endif
-#if PL_HAS_SHELL_QUEUE
-	#include "ShellQueue.h"
-#endif
-#if PL_HAS_MOTOR
-	#include "Motor.h"
-#endif
-#if PL_HAS_QUAD_CALIBRATION
-	#include "QuadCalib.h"
-#endif
-#if PL_HAS_MPC4728
-	#include "MPC4728.h"
-#endif
+	#include "Shell.h"
+	#include "CLS1.h"
+	#include "Application.h"
+	#include "FRTOS1.h"
+	#if PL_HAS_USB_CDC
+	  #include "USB1.h"
+	#endif
+	#if PL_HAS_BLUETOOTH
+	  #include "BT1.h"
+	#endif
+	#if PL_HAS_SHELL_QUEUE
+		#include "ShellQueue.h"
+	#endif
+	#if PL_HAS_MOTOR
+		#include "Motor.h"
+	#endif
+	#if PL_HAS_QUAD_CALIBRATION
+		#include "QuadCalib.h"
+	#endif
+	#if PL_HAS_MPC4728
+		#include "MPC4728.h"
+	#endif
+	#if PL_HAS_MOTOR_QUAD
+		#include "Q4CLeft.h"
+		#include "Q4CRight.h"
+	#endif
+
 
 static uint32_t SHELL_val; /* used as demo value for shell */
 
@@ -127,6 +132,10 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 	#if PL_HAS_MPC4728
 		MPC4728_ParseCommand,
 	#endif
+#endif
+#if PL_HAS_MOTOR_QUAD
+		Q4CLeft_ParseCommand,
+		Q4CRight_ParseCommand,
 #endif
   NULL /* Sentinel */
 };
