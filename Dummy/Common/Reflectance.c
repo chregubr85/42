@@ -27,6 +27,11 @@
 #if PL_HAS_MOTOR
 	#include "Motor.h"
 #endif
+#if PL_HAS_CONFIG_NVM
+	#include "NVM_Config.h"
+#endif
+
+
 #define REF_NOF_SENSORS 6 /* number of sensors */
 
 #define THRESHOLD_BLK 10 /* Threshold for firing Allert */
@@ -158,11 +163,6 @@ void REF_Danger(void){
 				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
 		}
-/*			else if(SensorRaw[i] > 0xfffe ){
-				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
-				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
-				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
-			}*/
 	}
 }
 
@@ -301,11 +301,21 @@ static void REF_StateMachine(void) {
 
   switch (refState) {
     case REF_STATE_INIT:
+#if PL_HAS_CONFIG_NVM
+    	/* If Calibration Data are saved, read it */
+    	for (i = 0; i<REF_NOF_SENSORS;i++){
+    		SensorCalibMinMax.minVal[i] = *((uint16_t*)NVMC_GetReflectanceData()+i);
+    		SensorCalibMinMax.minVal[i+REF_NOF_SENSORS] = *((uint16_t*)NVMC_GetReflectanceData()+(i+REF_NOF_SENSORS));
+    	}
+      SHELL_SendString((unsigned char*)"INFO: Loaded calibration data from FLASH...Gordon.\r\n");
+      refState = REF_STATE_READY;
+#else
       SHELL_SendString((unsigned char*)"INFO: No calibration data present.\r\n");
       refState = REF_STATE_NOT_CALIBRATED;
       break;
-      
+#endif
     case REF_STATE_NOT_CALIBRATED:
+
       REF_MeasureRaw(SensorRaw);
 
       if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
@@ -324,7 +334,7 @@ static void REF_StateMachine(void) {
       }
       refState = REF_STATE_CALIBRATING;
       break;
-    
+
     case REF_STATE_CALIBRATING:
       REF_CalibrateMinMax(SensorCalibMinMax.minVal, SensorCalibMinMax.maxVal, SensorRaw);
       if (EVNT_EventIsSet(EVNT_REF_START_STOP_CALIBRATION)) {
@@ -334,7 +344,11 @@ static void REF_StateMachine(void) {
       break;
     
     case REF_STATE_STOP_CALIBRATION:
-      SHELL_SendString((unsigned char*)"...stopping calibration.\r\n");
+    	/* Save Calibration Data */
+      NVMC_SaveReflectanceData(&SensorCalibMinMax, sizeof(SensorCalibMinMax));
+
+
+      SHELL_SendString((unsigned char*)"...stopping calibration. Files written to Flash\r\n");
       refState = REF_STATE_READY;
       break;
         
