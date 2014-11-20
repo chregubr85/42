@@ -30,6 +30,9 @@
 #if PL_HAS_MPC4728
 	#include "MPC4728.h"
 #endif
+#if PL_HAS_MOTOR_TACHO
+	#include "Tacho.h"
+#endif
 
 static uint32_t SHELL_val; /* used as demo value for shell */
 
@@ -127,6 +130,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 	#if PL_HAS_MPC4728
 		MPC4728_ParseCommand,
 	#endif
+#endif
+#if PL_HAS_MOTOR_TACHO
+	TACHO_ParseCommand,
 #endif
   NULL /* Sentinel */
 };

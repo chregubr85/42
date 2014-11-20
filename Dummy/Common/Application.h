@@ -70,6 +70,11 @@
 #if PL_HAS_MOTOR
 	#include "Motor.h"
 #endif
+
+#if PL_HAS_MOTOR_TACHO
+	#include "Tacho.h"
+#endif
+
 void APP_start(void);
 
 void APP_loop(void);

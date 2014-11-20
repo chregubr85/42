@@ -39,10 +39,13 @@ extern "C" {
 /* User includes (#include below this line is not maintained by Processor Expert) */
 #include "platform.h"
 #if PL_HAS_TIMER
-#include "Timer.h"
+	#include "Timer.h"
 #endif
 #if PL_HAS_TRIGGER
-#include "Trigger.h"
+	#include "Trigger.h"
+#endif
+#if PL_HAS_MOTOR_TACHO
+	#include "Tacho.h"
 #endif
 /*
 ** ===================================================================
@@ -146,6 +149,9 @@ void FRTOS1_vApplicationTickHook(void)
 #endif
 #if PL_HAS_QUAD_CALIBRATION
 	TMOUT1_AddTick();
+#endif
+#if PL_HAS_MOTOR_TACHO
+	TACHO_Sample();
 #endif
 }
 

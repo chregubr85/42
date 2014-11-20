@@ -26,6 +26,9 @@ void APP_start(void){
 #if PL_HAS_MOTOR
 	MOT_Init();
 #endif
+#if PL_HAS_MOTOR_TACHO
+	TACHO_Init();
+#endif
 
 #if PL_HAS_RTOS
 	RTOS_Init();

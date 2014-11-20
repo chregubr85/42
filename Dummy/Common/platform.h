@@ -113,6 +113,7 @@
 	#define PL_HAS_MPC4728 1
 	#define PL_IS_CALIBRATED 1
 	#define PL_HAS_CONFIG_NVM 1
+	#define PL_HAS_MOTOR_TACHO 1
 
 #else
 	#error "unknown board?"
