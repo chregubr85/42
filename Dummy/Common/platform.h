@@ -117,6 +117,7 @@
 	#define PL_HAS_MOTOR_TACHO 1
 	#define PL_HAS_DRIVE 1
 	#define PL_HAS_PID 1
+	#define PL_HAS_ULTRASONIC 1
 
 #else
 	#error "unknown board?"

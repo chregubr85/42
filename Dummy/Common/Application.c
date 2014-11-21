@@ -35,6 +35,9 @@ void APP_start(void){
 #if PL_HAS_DRIVE
 	DRV_Init();
 #endif
+#if PL_HAS_ULTRASONIC
+	US_Init();
+#endif
 
 #if PL_HAS_RTOS
 	RTOS_Init();

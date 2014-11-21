@@ -83,6 +83,10 @@
 	#include "Drive.h"
 #endif
 
+#if PL_HAS_ULTRASONIC
+	#include "Ultrasonic.h"
+#endif
+
 void APP_start(void);
 
 void APP_loop(void);
