@@ -37,7 +37,6 @@
 	#include "Motor.h"
 #endif
 
-
 void PL_Init(void) {
 #if PL_HAS_LED
   LED_Init();

@@ -120,7 +120,7 @@ static uint8_t Tune(const CLS1_StdIOType *io, uint8_t channel, MOT_MotorDevice *
   uint8_t res;
  
 #if PL_HAS_DRIVE
- // DRV_SetMode(DRV_MODE_NONE); /* turn off drive mode */
+  DRV_SetMode(DRV_MODE_NONE); /* turn off drive mode */
 #endif
   MOT_SetSpeedPercent(motorHandle, TUNE_MOTOR_PERCENT);
   CLS1_SendStr((uint8_t*)"Tuning channel...\r\n", io->stdOut);
