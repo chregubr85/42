@@ -154,6 +154,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_DRIVE
 	DRV_ParseCommand,
 #endif
+#if PL_HAS_ULTRASONIC
+	US_ParseCommand,
+#endif
   NULL /* Sentinel */
 };
 
