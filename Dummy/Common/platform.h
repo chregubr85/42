@@ -115,6 +115,8 @@
 	#define PL_HAS_CONFIG_NVM 1
 	#define PL_HAS_MOTOR_QUAD 1
 	#define PL_HAS_MOTOR_TACHO 1
+	#define PL_HAS_DRIVE 1
+	#define PL_HAS_PID 1
 
 #else
 	#error "unknown board?"

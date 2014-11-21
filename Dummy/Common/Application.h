@@ -75,6 +75,14 @@
 	#include "Tacho.h"
 #endif
 
+#if PL_HAS_PID
+	#include "Pid.h"
+#endif
+
+#if PL_HAS_DRIVE
+	#include "Drive.h"
+#endif
+
 void APP_start(void);
 
 void APP_loop(void);
