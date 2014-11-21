@@ -125,7 +125,7 @@ void DRV_Init(void) {
   DRV_EnableDisable(TRUE);
   DRV_SpeedLeft = 0;
   DRV_SpeedRight = 0;
-#if 0
+
   if (FRTOS1_xTaskCreate(
         DriveTask,  /* pointer to the task */
         "Drive", /* task name for kernel awareness debugging */
@@ -138,7 +138,7 @@ void DRV_Init(void) {
     for(;;){} /* error! probably out of memory */
     /*lint +e527 */
   }
-#endif
+
 }
 
 #endif /* PL_HAS_DRIVE */
