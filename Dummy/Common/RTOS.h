@@ -9,6 +9,13 @@
 #ifndef RTOS_H_
 #define RTOS_H_
 
+#if PL_HAS_RTOS
+#include "FRTOS1.h"
+#endif
+#include "task.h"
+
+TaskHandle_t checkRefl;
+
 /*! \brief Runs the scheduler */
 void RTOS_Run(void);
 
@@ -17,5 +24,6 @@ void RTOS_Init(void);
 
 /*! \brief De-Initializes the RTOS module */
 void RTOS_Deinit(void);
+
 
 #endif /* RTOS_H_ */

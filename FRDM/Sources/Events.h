@@ -64,7 +64,6 @@
 #include "ASerialLdd1.h"
 #include "PTA.h"
 #include "FRTOS1.h"
-#include "RTOSCNTRLDD1.h"
 #include "USB1.h"
 #include "USB0.h"
 #include "CDC1.h"
@@ -72,6 +71,9 @@
 #include "Rx1.h"
 #include "CS2.h"
 #include "CS3.h"
+#include "I2C1.h"
+#include "GI2C1.h"
+#include "MMA1.h"
 #include "Timer.h"
 #include "Keys.h"
 #include "Trigger.h"
@@ -220,6 +222,19 @@ void FRTOS1_vApplicationMallocFailedHook(void);
 **     Description :
 **         If enabled, the RTOS will call this hook in case memory
 **         allocation failed.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnError(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnError (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         Event called in case of error condition
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

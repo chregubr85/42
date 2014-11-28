@@ -42,6 +42,18 @@ void DRV_Init(void);
 /*! \brief Driver de-initialization */
 void DRV_Deinit(void);
 
+/*! \brief Get the current Speed for left
+ * \return Address DriveSpeedLeft
+ */
+int32_t * DRV_GetSpeedLeft();
+
+/*! \brief Get the current Speed for left
+ * \return Address DriveSpeedRight
+ */
+int32_t * DRV_GetSpeedRight();
+
+
+
 #endif /* PL_HAS_DRIVE */
 
 #endif /* DRIVE_H_ */

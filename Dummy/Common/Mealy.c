@@ -38,7 +38,11 @@ void MEALY_Step(void){
 		break;
 	case StateThree:
 		for(int i = 0; i<20; i++){
+#if PL_IS_FRDM
+			LED2_Neg();
+#elif PL_IS_ROBO
 			LED1_Neg();
+#endif
 			WAIT1_Waitms(100);
 		}
 		MyState = StateInit;

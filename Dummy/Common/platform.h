@@ -35,6 +35,7 @@
 	#define PL_HAS_BLUETOOTH 0
 	#define PL_HAS_USB_CDC 1
 	#define PL_HAS_SHELL_QUEUE 1
+	#define PL_HAS_ACCEL 1
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
@@ -118,6 +119,7 @@
 	#define PL_HAS_DRIVE 1
 	#define PL_HAS_PID 1
 	#define PL_HAS_ULTRASONIC 1
+	#define PL_HAS_ACCEL 1
 
 #else
 	#error "unknown board?"

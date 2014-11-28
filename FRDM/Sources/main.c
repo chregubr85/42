@@ -60,7 +60,6 @@
 #include "ASerialLdd1.h"
 #include "PTA.h"
 #include "FRTOS1.h"
-#include "RTOSCNTRLDD1.h"
 #include "USB1.h"
 #include "USB0.h"
 #include "CDC1.h"
@@ -68,6 +67,9 @@
 #include "Rx1.h"
 #include "CS2.h"
 #include "CS3.h"
+#include "I2C1.h"
+#include "GI2C1.h"
+#include "MMA1.h"
 
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
