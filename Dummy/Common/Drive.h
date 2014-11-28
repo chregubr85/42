@@ -38,6 +38,12 @@ void DRV_EnableDisablePos(bool enable);
  */
 void DRV_SetSpeed(int32_t left, int32_t right);
 
+void DRV_SetPos(int32_t pos);
+
+void DRV_Turn(int32_t angle, uint8_t dir);
+
+
+
 /*! \brief Driver initialization */
 void DRV_Init(void);
 

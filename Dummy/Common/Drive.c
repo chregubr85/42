@@ -38,6 +38,23 @@ void DRV_SetSpeed(int32_t left, int32_t right) {
   DRV_SpeedRight = right;
 }
 
+void DRV_SetPos(int32_t pos){
+		DRV_PosLeft += (pos);
+		DRV_PosRight += (pos);
+}
+
+void DRV_Turn(int32_t angle, uint8_t dir){
+	int32_t steps;
+	steps = angle*(2900/360);
+	if(dir>0){
+		DRV_PosLeft += (steps);
+		DRV_PosRight -= (steps);
+	}else{
+		DRV_PosLeft -= (steps);
+		DRV_PosRight += (steps);
+	}
+}
+
 int32_t * DRV_GetSpeedLeft(){
 	return &DRV_SpeedLeft;
 }
@@ -188,6 +205,7 @@ static void DRV_PrintHelp(const CLS1_StdIOType *io) {
   CLS1_SendHelpStr((unsigned char*)"  pos (on|off)", (unsigned char*)"Turns speed pid on or ff\r\n", io->stdOut);
   CLS1_SendHelpStr((unsigned char*)"  pos (L|R) <value>", (unsigned char*)"Sets speed value\r\n", io->stdOut);
   CLS1_SendHelpStr((unsigned char*)"  pos LR <value>", (unsigned char*)"Sets speed value\r\n", io->stdOut);
+  CLS1_SendHelpStr((unsigned char*)"  angle <value>", (unsigned char*)"turns robot\r\n", io->stdOut);
 }
 
 uint8_t DRV_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io) {
@@ -248,11 +266,22 @@ uint8_t DRV_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_Std
   } else if (UTIL1_strncmp((char*)cmd, (char*)"drive pos", sizeof("drive pos")-1)==0) {
     p = cmd+sizeof("drive pos");
     if (UTIL1_ScanDecimal32sNumber(&p, &val32)==ERR_OK) {
-      DRV_PosLeft += val32;
-      DRV_PosRight += val32;
+      //DRV_PosLeft += val32;
+      //DRV_PosRight += val32;
+    	DRV_SetPos(val32);
       *handled = TRUE;
     } else {
       res = ERR_FAILED;
+    }
+  } else if (UTIL1_strncmp((char*)cmd, (char*)"drive angle", sizeof("drive angle")-1)==0) {
+    p = cmd+sizeof("drive angle");
+    if (UTIL1_ScanDecimal32sNumber(&p, &val32)==ERR_OK) {
+      //DRV_PosLeft += val32;
+      //DRV_PosRight += val32;
+    	DRV_Turn(val32,0);
+      *handled = TRUE;
+    } else {
+     res = ERR_FAILED;
     }
   }
   return res;
