@@ -10,8 +10,8 @@
 #define TIMER_H_
 
 #if PL_IS_FRDM
-#define TMR_TICK_MS  10
-  /*!< we get called every 10ms */
+#define TMR_TICK_MS  1
+
 #elif PL_IS_ROBO
 #define TMR_TICK_MS  1
 #endif

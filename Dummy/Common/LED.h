@@ -51,7 +51,7 @@
     /*!< De-Initialize LED */
 #endif
 
-#if PL_NOF_LEDS >= 3
+#if PL_NOF_LEDS >= 3 & !PL_HAS_RADIO
  #include "LedBit3.h"
   #define LED3_On()     LedBit3_ClrVal()
     /*!< Turn LED 1 on */

@@ -26,7 +26,7 @@ void initLED(void){
 	LED2_Off();
 #endif
 
-#if PL_NOF_LEDS >= 3
+#if PL_NOF_LEDS >= 3 & !PL_HAS_RADIO
 	LED3_Off();
 #endif
 }

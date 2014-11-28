@@ -99,6 +99,12 @@ void APP_start(void);
 
 void APP_loop(void);
 
+/*!
+ * \brief Debug printing function
+ * \param str Debug string to print
+ */
+void APP_DebugPrint(unsigned char *str);
+
 void APP_HandleEvent(EVNT_Handle event);
 
 #endif /*__APPLICATION_H_*/

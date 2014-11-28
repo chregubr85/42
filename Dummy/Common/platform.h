@@ -36,6 +36,8 @@
 	#define PL_HAS_USB_CDC 1
 	#define PL_HAS_SHELL_QUEUE 1
 	#define PL_HAS_ACCEL 1
+	#define PL_HAS_RADIO 1
+	#define PL_HAS_SEMAPHORE 0
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
@@ -55,7 +57,7 @@
   	  #define LedGREEN_Init() 	LED2_Init()
   	  #define LedGREEN_Deinit() LED2_Deinit()
 
-
+#if !PL_HAS_RADIO
   	  #define LedBLUE_On() 		LED3_On()
   	  #define LedBLUE_Off() 	LED3_Off()
   	  #define LedBLUE_Neg()		LED3_Neg()
@@ -72,7 +74,7 @@
 	  #define LedVIOLET_Off()		led13Off()
 	  #define LedTORQUOISE_Off()	led23Off()
 	  #define LedWHITE_Off()		led123Off()
-
+#endif
 	#if PL_IS_FRDM
 		#define PL_KEY_POLLED_KEY1    (0)
   	  	#define PL_KEY_POLLED_KEY2    (0)
@@ -120,6 +122,7 @@
 	#define PL_HAS_PID 1
 	#define PL_HAS_ULTRASONIC 1
 	#define PL_HAS_ACCEL 1
+	#define PL_HAS_RADIO 1
 
 #else
 	#error "unknown board?"

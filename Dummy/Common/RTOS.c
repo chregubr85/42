@@ -65,9 +65,11 @@ void RTOS_Init(void) {
   if (FRTOS1_xTaskCreate(App_loop, (signed portCHAR *)"App_loop", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
       for(;;){} /* error */
     }
+#if PL_HAS_LINE_SENSOR
   if (FRTOS1_xTaskCreate(CheckReflactance, (signed portCHAR *)"CheckReflactance", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, checkRefl) != pdPASS) {
        for(;;){} /* error */
      }
+#endif
 }
 
 void RTOS_Deinit(void) {

@@ -61,6 +61,12 @@ void APP_loop(void){
 	}
 }
 
+void APP_DebugPrint(unsigned char *str) {
+#if PL_HAS_SHELL
+  CLS1_SendStr(str, CLS1_GetStdio()->stdOut);
+#endif
+}
+
 void APP_HandleEvent(EVNT_Handle event){
 	uint8 duration = 100;
 	uint8 freq = 100;
@@ -77,7 +83,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case EVNT_LED_HEARTBEAT:
 		#if PL_IS_FRDM
-			LedBLUE_Neg();
+			LedGREEN_Neg();
 		#elif PL_IS_ROBO
 			LED2_Neg();
 		#endif
@@ -118,7 +124,7 @@ void APP_HandleEvent(EVNT_Handle event){
 #endif
 #if PL_HAS_JOYSTICK
 	case  EVNT_BTN_RED_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -126,7 +132,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_BLUE_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -134,7 +140,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_YELLOW_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -142,7 +148,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_GREEN_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -150,7 +156,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_E_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -158,7 +164,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_F_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL
@@ -166,7 +172,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_KEY_PRESSED:
-		#if PL_IS_FRDM
+		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
 		#if PL_HAS_SHELL

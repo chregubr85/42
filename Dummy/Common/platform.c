@@ -36,6 +36,9 @@
 #if PL_HAS_MOTOR
 	#include "Motor.h"
 #endif
+#if PL_HAS_RADIO
+	#include "RNet_App.h"
+#endif
 
 void PL_Init(void) {
 #if PL_HAS_LED
@@ -62,6 +65,9 @@ void PL_Init(void) {
 #if PL_HAS_DEBOUNCE
   DBNC_Init();
   KEYDBNC_Init();
+#endif
+#if PL_HAS_RADIO
+  RNETA_Init();
 #endif
 }
 
@@ -93,5 +99,8 @@ void PL_Deinit(void) {
 #endif
 #if PL_HAS_MOTOR
   MOT_Deinit();
+#endif
+#if PL_HAS_RADIO
+  RNETA_Deinit();
 #endif
 }

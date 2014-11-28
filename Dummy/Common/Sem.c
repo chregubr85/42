@@ -25,7 +25,11 @@ static portTASK_FUNCTION(vSlaveTask, pvParameters) {
   for(;;) {
     if (sem != NULL) {
       if (FRTOS1_xSemaphoreTake(sem, portMAX_DELAY)==pdTRUE) {
+#if PL_IS_FRDM
+        LED2_Neg();
+#elif PL_IS_ROBO
         LED1_Neg();
+#endif
       }
     }
   }
