@@ -266,16 +266,16 @@ void PID_Init(void) {
   speedRightConfig.lastError = 0;
   speedRightConfig.integral = 0;
 
-  posLeftConfig.pFactor100 = 800;
-  posLeftConfig.iFactor100 = 50;
-  posLeftConfig.dFactor100 = 0;
-  posLeftConfig.iAntiWindup = 50;
+  posLeftConfig.pFactor100 = 4;//800;
+  posLeftConfig.iFactor100 = 1;//50;
+  posLeftConfig.dFactor100 = 1;
+  posLeftConfig.iAntiWindup = 100;
   posLeftConfig.lastError = 0;
   posLeftConfig.integral = 0;
-  posRightConfig.pFactor100 = 800;
-  posRightConfig.iFactor100 = 50;
-  posRightConfig.dFactor100 = 0;
-  posRightConfig.iAntiWindup = 50;
+  posRightConfig.pFactor100 = 4;//800;
+  posRightConfig.iFactor100 = 1;//50;
+  posRightConfig.dFactor100 = 1;
+  posRightConfig.iAntiWindup = 100;
   posRightConfig.lastError = 0;
   posRightConfig.integral = 0;
 }
