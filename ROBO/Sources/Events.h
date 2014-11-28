@@ -106,6 +106,7 @@
 #include "IntFlashLdd1.h"
 #include "TU_US.h"
 #include "TRIG.h"
+#include "MMA1.h"
 #include "UTIL1.h"
 #include "Keys.h"
 

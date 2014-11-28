@@ -87,6 +87,14 @@
 	#include "Ultrasonic.h"
 #endif
 
+#if PL_HAS_ULTRASONIC
+	#include "Accel.h"
+#endif
+
+#if PL_HAS_ACCEL
+	#include "Accel.h"
+#endif
+
 void APP_start(void);
 
 void APP_loop(void);

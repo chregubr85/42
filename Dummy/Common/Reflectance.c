@@ -30,7 +30,9 @@
 #if PL_HAS_CONFIG_NVM
 	#include "NVM_Config.h"
 #endif
-
+#if PL_HAS_DRIVE
+	#include "Drive.h"
+#endif
 
 #define REF_NOF_SENSORS 6 /* number of sensors */
 
@@ -149,20 +151,27 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
   LED_IR_Off();
 }
 
+
 void REF_Danger(void){
 	int i = 0;
 	uint8_t sensor = 0;
-	unsigned char* temp;
+	bool temp;
 
-	for( i=0;i<REF_NOF_SENSORS;i++) {
 
-			if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0){
-				sensor = i;
+	if(!EVNT_EventIsSet(EVNT_DONT_FALL_DOWN))
+		for( i=0;i<REF_NOF_SENSORS;i++) {
 
-				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
-				  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
-				  EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
-		}
+				if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0 ){
+					sensor = i;
+
+				//    MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , -MOT_GetMotorHandle(MOT_MOTOR_LEFT)->currPWMvalue);
+				//	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -MOT_GetMotorHandle(MOT_MOTOR_RIGHT)->currPWMvalue);
+					EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
+					//while(SensorCalibrated[sensor] < 1000-THRESHOLD_BLK ){
+
+					//}
+
+			}
 	}
 }
 
@@ -344,6 +353,7 @@ static void REF_StateMachine(void) {
       break;
     
     case REF_STATE_STOP_CALIBRATION:
+
     	/* Save Calibration Data */
       NVMC_SaveReflectanceData(&SensorCalibMinMax, sizeof(SensorCalibMinMax));
 

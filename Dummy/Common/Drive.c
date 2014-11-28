@@ -23,6 +23,8 @@ static volatile bool DRV_PosOn = FALSE;
 static int32_t DRV_SpeedLeft, DRV_SpeedRight;
 static int32_t DRV_PosLeft, DRV_PosRight;
 
+
+
 void DRV_EnableDisable(bool enable) {
   DRV_SpeedOn = enable;
 }
@@ -34,6 +36,14 @@ void DRV_EnableDisablePos(bool enable) {
 void DRV_SetSpeed(int32_t left, int32_t right) {
   DRV_SpeedLeft = left;
   DRV_SpeedRight = right;
+}
+
+int32_t * DRV_GetSpeedLeft(){
+	return &DRV_SpeedLeft;
+}
+
+int32_t * DRV_GetSpeedRight(){
+	return &DRV_SpeedRight;
 }
 
 static portTASK_FUNCTION(DriveTask, pvParameters) {

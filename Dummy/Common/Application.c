@@ -38,6 +38,9 @@ void APP_start(void){
 #if PL_HAS_ULTRASONIC
 	US_Init();
 #endif
+#if PL_HAS_ACCEL
+	ACCEL_Init();
+#endif
 
 #if PL_HAS_RTOS
 	RTOS_Init();
@@ -61,6 +64,8 @@ void APP_loop(void){
 void APP_HandleEvent(EVNT_Handle event){
 	uint8 duration = 100;
 	uint8 freq = 100;
+	int32_t aleft = 0;
+	int32_t brigth = 0;
 
 	switch(event){
 	case EVNT_INIT:
@@ -106,7 +111,9 @@ void APP_HandleEvent(EVNT_Handle event){
 			break;
 #if PL_HAS_MOTOR
 	case EVNT_DONT_FALL_DOWN:
-
+		aleft = *DRV_GetSpeedLeft();
+		brigth = *DRV_GetSpeedRight();
+		DRV_SetSpeed(-aleft,-brigth);
 		break;
 #endif
 #if PL_HAS_JOYSTICK
