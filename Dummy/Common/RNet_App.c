@@ -50,11 +50,13 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
     case RAPP_MSG_TYPE_DATA: /* generic data message */
       *handled = TRUE;
       val = *data; /* get data value */
-#if PL_HAS_SHELL
-      CLS1_SendStr((unsigned char*)"Data: ", io->stdOut);
-      CLS1_SendNum8u(val, io->stdOut);
-      CLS1_SendStr((unsigned char*)" from addr 0x", io->stdOut);
-      buf[0] = '\0';
+
+#if PL_HAS_SHELL  //TODO SEND AN SHELQUEUE CBR
+          CLS1_SendStr((unsigned char*)"Data: ", io->stdOut);
+          CLS1_SendNum8u(val, io->stdOut);
+          CLS1_SendStr((unsigned char*)" from addr 0x", io->stdOut);
+          buf[0] = '\0';
+
 #if RNWK_SHORT_ADDR_SIZE==1
       UTIL1_strcatNum8Hex(buf, sizeof(buf), srcAddr);
 #else

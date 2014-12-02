@@ -38,6 +38,8 @@
 	#define PL_HAS_ACCEL 1
 	#define PL_HAS_RADIO 1
 	#define PL_HAS_SEMAPHORE 0
+	#define PL_HAS_REMOTE 1
+	#define PL_HAS_ANALOG_JOY 1
 
 #if !PL_HAS_KEYS
   	  #define LedRED_On() 		LED1_On()
@@ -123,6 +125,7 @@
 	#define PL_HAS_ULTRASONIC 1
 	#define PL_HAS_ACCEL 1
 	#define PL_HAS_RADIO 1
+	#define PL_HAS_REMOTE 1
 
 #else
 	#error "unknown board?"

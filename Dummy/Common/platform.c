@@ -69,6 +69,9 @@ void PL_Init(void) {
 #if PL_HAS_RADIO
   RNETA_Init();
 #endif
+#if PL_HAS_ANALOG_JOY
+  AD1_Init();
+#endif
 }
 
 void PL_Deinit(void) {

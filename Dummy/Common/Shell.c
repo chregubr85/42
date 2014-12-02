@@ -57,6 +57,9 @@
 	#if RNET_CONFIG_REMOTE_STDIO
 	  #include "RStdIO.h"
 	#endif
+	#if PL_HAS_ANALOG_JOY
+		#include "Keys.h"
+	#endif
 
 
 static uint32_t SHELL_val; /* used as demo value for shell */
@@ -178,6 +181,9 @@ static const CLS1_ParseCommandCallback CmdParserTable[] =
 #if PL_HAS_RADIO
 	RNETA_ParseCommand,
 	RNET1_ParseCommand,
+#endif
+#if PL_HAS_ANALOG_JOY
+	KEY_ParseCommand,
 #endif
 NULL /* Sentinel */
 };

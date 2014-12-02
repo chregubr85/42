@@ -11,6 +11,8 @@
 #define KEYS_H_
 
 #include "Platform.h"
+#include "CLS1.h"
+#include "util1.h"
 
 #if PL_HAS_KEYS
 
@@ -105,6 +107,11 @@ typedef enum {
 void KEY_OnInterrupt(KEY_Buttons button);
 #endif
 
+#if PL_HAS_ANALOG_JOY
+	#include "AD1.h"
+	void GetXY(uint16_t *x, uint16_t *y);
+#endif
+
 /*!
  * \brief Checks the key status and generates the events.
  */
@@ -119,6 +126,12 @@ void KEY_DisableInterrupts(void);
 
 /*! \brief Finish access to key hardware. Called after KEY_Open(). */
 void KEY_Close(void);
+
+static uint8_t PrintXY(CLS1_ConstStdIOType *io);
+
+static uint8_t Key_PrintHelp(const CLS1_StdIOType *io);
+
+uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 
 /*! \brief Key driver initialization */
 void KEY_Init(void);
