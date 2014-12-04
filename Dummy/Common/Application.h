@@ -94,6 +94,9 @@
 #if PL_HAS_ACCEL
 	#include "Accel.h"
 #endif
+#if PL_HAS_FIGHT
+	#include "Fight.h"
+#endif
 
 void APP_start(void);
 

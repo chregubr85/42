@@ -41,6 +41,9 @@ void APP_start(void){
 #if PL_HAS_ACCEL
 	ACCEL_Init();
 #endif
+#if PL_HAS_FIGHT
+	FIGHT_Init();
+#endif
 
 #if PL_HAS_RTOS
 	RTOS_Init();

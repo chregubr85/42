@@ -156,6 +156,7 @@ void FRTOS1_vApplicationTickHook(void)
 #if PL_HAS_MOTOR_TACHO
 	TACHO_Sample();
 #endif
+
 }
 
 /*

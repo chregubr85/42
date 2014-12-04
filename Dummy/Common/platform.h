@@ -126,6 +126,7 @@
 	#define PL_HAS_ACCEL 1
 	#define PL_HAS_RADIO 1
 	#define PL_HAS_REMOTE 1
+	#define PL_HAS_FIGHT 1
 
 #else
 	#error "unknown board?"

@@ -92,6 +92,7 @@ void RTOS_Init(void) {
        for(;;){} /* error */
      }
 #endif
+
 }
 
 void RTOS_Deinit(void) {

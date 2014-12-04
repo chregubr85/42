@@ -132,6 +132,9 @@ uint8_t US_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdI
 }
 #endif
 
+
+
+
 void US_Deinit(void) {
    TRIG_Deinit(usDevice.trigDevice);
    TU_US_Deinit(usDevice.echoDevice);
