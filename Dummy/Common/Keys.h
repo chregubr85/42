@@ -29,6 +29,8 @@ typedef enum {
 
 } KEY_Buttons;
 
+static volatile uint16_t xcalib, ycalib;
+
 #if PL_NOF_KEYS>=1
   #include "SW1.h"
 
@@ -109,7 +111,24 @@ void KEY_OnInterrupt(KEY_Buttons button);
 
 #if PL_HAS_ANALOG_JOY
 	#include "AD1.h"
-	void GetXY(uint16_t *x, uint16_t *y);
+
+static int8_t ToSigned8Bit(uint16_t val);
+
+
+	#define xmin 35
+	#define ymin 22
+
+	void GetXY(int8_t *x, int8_t *y);
+
+	void CalibXY(void);
+
+	static uint8_t PrintXY(CLS1_ConstStdIOType *io);
+
+	static uint8_t Key_PrintHelp(const CLS1_StdIOType *io);
+
+	int8_t ScaleToPercent(uint16_t val, bool x);
+
+	uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 #endif
 
 /*!
@@ -126,12 +145,6 @@ void KEY_DisableInterrupts(void);
 
 /*! \brief Finish access to key hardware. Called after KEY_Open(). */
 void KEY_Close(void);
-
-static uint8_t PrintXY(CLS1_ConstStdIOType *io);
-
-static uint8_t Key_PrintHelp(const CLS1_StdIOType *io);
-
-uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 
 /*! \brief Key driver initialization */
 void KEY_Init(void);

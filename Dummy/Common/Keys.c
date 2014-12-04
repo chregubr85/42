@@ -111,53 +111,114 @@ void KEY_DisableInterrupts(void) {
 #endif
 }
 
-void GetXY(uint16_t *x, uint16_t *y) {
-	uint16_t vals[2];
 
-	AD1_Measure(TRUE);
-	AD1_GetValue16(&vals[0]);
-	*x = vals[0];
-	*y = vals[1];
-}
 
-uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io)
-{
-	if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, (char*)"Key help")==0) {
-	   *handled = TRUE;
-	   return Key_PrintHelp(io);
-	} else if (UTIL1_strcmp((char*)cmd, CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, "Key status")==0) {
-	    *handled = TRUE;
-	    return  PrintXY(io);
-  }
-}
+#if PL_HAS_ANALOG_JOY
 
- static uint8_t PrintXY(CLS1_ConstStdIOType *io) {
+	int8_t ScaleToPercent(uint16_t val, bool x) {
+	  int temp;
+	  uint16_t calib, min;
 
-	  uint16_t x, y;
-	  unsigned char buf[24];
+	if(x){
+		calib = xcalib;
+		min = xmin;
+	}
+	else {
+		calib = ycalib;
+		min = ymin;
+	}
+		  if(val < calib){
+			  temp = -100+(100*(val-min))/(calib-min);
+		  }
+		  else if(val > calib){
+			  temp = (100*(val-calib))/(0xffff-calib);
+		  }
+		  else {
+			  temp = 0;
+		  }
+	return (int8_t) temp;
 
-	  GetXY(&x, &y);
+	}
 
-	    UTIL1_strcpy(buf, sizeof(buf), (unsigned char*)"X: 0x");
-	    UTIL1_strcatNum16Hex(buf, sizeof(buf), x);
+	void CalibXY(void){
+			uint16_t vals[2];
+		int8_t x,y;
 
-	    UTIL1_strcat(buf, sizeof(buf), (unsigned char*)") Y: 0x");
-	    UTIL1_strcatNum16Hex(buf, sizeof(buf), y);
+			AD1_Measure(TRUE);
+			AD1_GetValue16(&vals[0]);
+			xcalib=(vals[0]);
+			ycalib=(vals[1]);
+		}
 
-	    UTIL1_strcat(buf, sizeof(buf), (unsigned char*)")\r\n");
-	    CLS1_SendStr(buf, io->stdOut);
-	    return ERR_OK;
-  }
+	static int8_t ToSigned8Bit(uint16_t val) {
+	  int tmp;
 
- static uint8_t Key_PrintHelp(const CLS1_StdIOType *io) {
-   CLS1_SendHelpStr((unsigned char*)"Key", (unsigned char*)"Group of Key commands\r\n", io->stdOut);
-   CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Shows Key help or status\r\n", io->stdOut);
-   return ERR_OK;
- }
+	  tmp = ((int)((val>>8)&0xFF))-127;
+	  if (tmp<-128) {
+		tmp = -128;
+	  } else if (tmp>127) {
+		tmp = 127;
+	  }
+	  return (int8_t)tmp;
+	}
 
+	void GetXY(int8_t *x, int8_t *y) {
+		uint16_t vals[2];
+
+		AD1_Measure(TRUE);
+		AD1_GetValue16(&vals[0]);
+
+		/**x = ScaleToPercent(vals[0], TRUE);
+		*y = ScaleToPercent(vals[1], FALSE);*/
+		*x = ToSigned8Bit(vals[0]);
+		*y = ToSigned8Bit(vals[1]);
+
+	}
+
+	uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io)
+	{
+		if (UTIL1_strcmp((char*)cmd, (char*)CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, (char*)"Key help")==0) {
+		   *handled = TRUE;
+		   return Key_PrintHelp(io);
+		} else if (UTIL1_strcmp((char*)cmd, CLS1_CMD_HELP)==0 || UTIL1_strcmp((char*)cmd, "Key status")==0) {
+			*handled = TRUE;
+			return  PrintXY(io);
+	  }
+	}
+
+	 static uint8_t PrintXY(CLS1_ConstStdIOType *io) {
+
+		  int8_t x, y;
+		  unsigned char buf[64];
+
+		  GetXY(&x, &y);
+
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"X: (");
+			UTIL1_strcatNum8s(buf, sizeof(buf), x);
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)") Calibration X: (");
+			UTIL1_strcatNum8s(buf, sizeof(buf), xcalib);
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)")\r\n");
+
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"Y: (");
+			UTIL1_strcatNum8s(buf, sizeof(buf), y);
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)") Calibration Y: (");
+			UTIL1_strcatNum8s(buf, sizeof(buf), ycalib);
+			UTIL1_strcat(buf, sizeof(buf), (unsigned char*)")\r\n\r\n");
+
+			CLS1_SendStr(buf, io->stdOut);
+			return ERR_OK;
+	  }
+
+	 static uint8_t Key_PrintHelp(const CLS1_StdIOType *io) {
+	   CLS1_SendHelpStr((unsigned char*)"Key", (unsigned char*)"Group of Key commands\r\n", io->stdOut);
+	   CLS1_SendHelpStr((unsigned char*)"  help|status", (unsigned char*)"Shows Key help or status\r\n", io->stdOut);
+	   return ERR_OK;
+	 }
+
+#endif
 /*! \brief Key driver initialization */
 void KEY_Init(void) {
-  /* nothing needed for now */
+
 }
 
 /*! \brief Key driver de-initialization */

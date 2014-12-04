@@ -12,13 +12,16 @@
 #include "RApp.h"
 #include "RNet_App.h"
 
-#define AddrROBO 42
-#define AddrFRDM 43
+#define ADDR_ROBO 42
+#define ADDR_FRDM 43
 
+static bool calibratetY;
 
 typedef enum{
 	duty_left,
-	duty_right
+	duty_right,
+	anal_x, //HIHI ANAL
+	anal_y
 } protocol42_type;
 
 typedef enum{
@@ -34,13 +37,15 @@ typedef struct{
 } protocol42;
 
 
-static protocol42 txdata = {
+/*static protocol42 txdata = {
 		isROBOcop,
 		duty_left,
 		0
-};
+};*/
 
-void sendData42(void);
+void sendData42(protocol42 txdata);
+
+void reciveData42(protocol42 rxdata);
 
 
 #endif /* REMOTE_H_ */

@@ -17,13 +17,21 @@
 #if PL_HAS_ACCEL
 	#include "Accel.h"
 #endif
-
+#if PL_HAS_REMOTE
+	#include "RNet_App.h"
+	#include "RApp.h"
+	#include "remote.h"
+#endif
 
 
 
 static portTASK_FUNCTION(T1, pvParameters) {
 #if PL_HAS_ACCEL
 	ACCEL_LowLevelInit();
+#endif
+#if PL_HAS_ANALOG_JOY
+	AD1_Calibrate(TRUE);
+	CalibXY();
 #endif
   for(;;) {
 	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
@@ -36,7 +44,21 @@ static portTASK_FUNCTION(App_loop, pvParameters) {
 		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
 #if PL_HAS_LINE_SENSOR
-		REF_Danger();
+	REF_Danger();
+#endif
+#if PL_HAS_REMOTE && PL_HAS_ANALOG_JOY
+	int8_t x,y;
+	protocol42 txdata;
+
+	GetXY(&x,&y);
+
+	txdata.target = isROBOcop;
+	txdata.type = anal_x;
+	txdata.data = (uint8_t)x;
+
+	txdata.type = anal_y;
+	txdata.data = (uint8_t)y;
+	sendData42(txdata);
 #endif
 		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
 

@@ -122,6 +122,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		DRV_SetSpeed(-aleft,-brigth);
 		break;
 #endif
+
 #if PL_HAS_JOYSTICK
 	case  EVNT_BTN_RED_PRESSED:
 		#if PL_IS_FRDM & !PL_HAS_RADIO

@@ -22,6 +22,10 @@
 #include "RPHY.h"
 #include "Shell.h"
 #include "Motor.h"
+#if PL_HAS_REMOTE
+	#include "remote.h"
+#endif
+
 
 static RNWK_ShortAddrType APP_dstAddr = RNWK_ADDR_BROADCAST; /* destination node address */
 
@@ -43,13 +47,16 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
   CLS1_ConstStdIOTypePtr io = CLS1_GetStdio();
 #endif
   uint8_t val;
+  protocol42 rxdata;
+  uint16_t test;
+  int16_t test2;
   
   (void)size;
   (void)packet;
   switch(type) {
     case RAPP_MSG_TYPE_DATA: /* generic data message */
       *handled = TRUE;
-      val = *data; /* get data value */
+      val =  *data; /* get data value */
 
 #if PL_HAS_SHELL  //TODO SEND AN SHELQUEUE CBR
           CLS1_SendStr((unsigned char*)"Data: ", io->stdOut);
@@ -66,6 +73,22 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
       CLS1_SendStr(buf, io->stdOut);
 #endif /* PL_HAS_SHELL */      
       return ERR_OK;
+    case RAPP_MSG_TYPE_PROTOCOL42:
+
+    	rxdata.target = (int8_t)*data;
+    	rxdata.type = (int8_t)*(data+1);
+    	test = (*(data+2));
+    	test2 = (int16_t)(*(data+2));
+    	rxdata.data = (int16_t)(*(data+2));
+
+    	reciveData42(rxdata);
+
+
+
+
+
+
+
     default: /*! \todo Handle your own messages here */
       break;
   } /* switch */
@@ -118,7 +141,13 @@ static void Process(void) {
 }
 
 static void Init(void) {
-  if (RAPP_SetThisNodeAddr(RNWK_ADDR_BROADCAST)!=ERR_OK) { /* set a default address */
+//  if (RAPP_SetThisNodeAddr(RNWK_ADDR_BROADCAST)!=ERR_OK) { /* set a default address */
+#if PL_IS_ROBO
+	#define RNWK_ADDR ADDR_ROBO
+#elif PL_IS_FRDM
+	#define RNWK_ADDR ADDR_FRDM
+#endif
+	 if (RAPP_SetThisNodeAddr(RNWK_ADDR)!=ERR_OK) { /* set a default address */
     APP_DebugPrint((unsigned char*)"ERR: Failed setting node address\r\n");
   }
 }
