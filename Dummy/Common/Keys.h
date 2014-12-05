@@ -109,16 +109,18 @@ static volatile uint16_t xcalib, ycalib;
 void KEY_OnInterrupt(KEY_Buttons button);
 #endif
 
+#define xmin 0
+#define ymin 0
+
 #if PL_HAS_ANALOG_JOY
 	#include "AD1.h"
 
 static int8_t ToSigned8Bit(uint16_t val);
 
 
-	#define xmin 35
-	#define ymin 22
 
-	void GetXY(int8_t *x, int8_t *y);
+
+	void GetXY(uint8_t *x, uint8_t *y);
 
 	void CalibXY(void);
 
@@ -126,7 +128,7 @@ static int8_t ToSigned8Bit(uint16_t val);
 
 	static uint8_t Key_PrintHelp(const CLS1_StdIOType *io);
 
-	int8_t ScaleToPercent(uint16_t val, bool x);
+	uint8_t ScaleToU8(uint16_t val, bool x);
 
 	uint8_t KEY_ParseCommand(const unsigned char *cmd, bool *handled, const CLS1_StdIOType *io);
 #endif

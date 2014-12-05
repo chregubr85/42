@@ -75,6 +75,7 @@ void APP_HandleEvent(EVNT_Handle event){
 	uint8 freq = 100;
 	int32_t aleft = 0;
 	int32_t brigth = 0;
+	protocol42 txdata;
 
 	switch(event){
 	case EVNT_INIT:
@@ -160,6 +161,19 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_E_PRESSED:
+		#if PL_HAS_REMOTE
+				txdata.target = isROBOcop;
+				txdata.type = activateRemote;
+				sendData42(txdata);
+				if(!remoteON) {
+					remoteON = TRUE;
+					EVNT_SetEvent(EVNT_REMOTE_ACTIVATE);
+				}
+				else {
+					remoteON = FALSE;
+					EVNT_SetEvent(EVNT_REMOTE_DEACTIVATE);
+				}
+		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
@@ -182,6 +196,14 @@ void APP_HandleEvent(EVNT_Handle event){
 		#if PL_HAS_SHELL
 			CLS1_SendStr("Button Key pressed\r", CLS1_GetStdio()->stdOut);
 		#endif
+		break;
+#endif
+#if PL_HAS_REMOTE
+	case EVNT_REMOTE_ACTIVATE:
+			FRTOS1_vTaskResume(remoteTask);
+		break;
+	case EVNT_REMOTE_DEACTIVATE:
+			FRTOS1_vTaskSuspend(remoteTask);
 		break;
 #endif
 	default:

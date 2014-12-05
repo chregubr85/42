@@ -18,6 +18,10 @@
 typedef enum EVNT_Handle {
   EVNT_INIT,            /*!< System Initialization Event */
 #if PL_NOF_KEYS >= 1
+	#if PL_HAS_REMOTE
+	  EVNT_REMOTE_ACTIVATE,
+	  EVNT_REMOTE_DEACTIVATE,
+	#endif
 	#if PL_IS_FRDM & PL_HAS_JOYSTICK
 	  // Button Red
 	  EVNT_BTN_RED_PRESSED,

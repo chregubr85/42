@@ -98,6 +98,10 @@
 	#include "Fight.h"
 #endif
 
+#if PL_HAS_REMOTE
+	#include "remote.h"
+#endif
+
 void APP_start(void);
 
 void APP_loop(void);

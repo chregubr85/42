@@ -23,11 +23,16 @@
 	#include "remote.h"
 #endif
 
+TaskHandle_t checkRefl;
+TaskHandle_t remoteTask;
 
 
 static portTASK_FUNCTION(T1, pvParameters) {
 #if PL_HAS_ACCEL
 	ACCEL_LowLevelInit();
+#endif
+#if PL_HAS_REMOTE
+	remoteInit();
 #endif
 #if PL_HAS_ANALOG_JOY
 	AD1_Calibrate(TRUE);
@@ -46,20 +51,7 @@ static portTASK_FUNCTION(App_loop, pvParameters) {
 #if PL_HAS_LINE_SENSOR
 	REF_Danger();
 #endif
-#if PL_HAS_REMOTE && PL_HAS_ANALOG_JOY
-	int8_t x,y;
-	protocol42 txdata;
 
-	GetXY(&x,&y);
-
-	txdata.target = isROBOcop;
-	txdata.type = anal_x;
-	txdata.data = (uint8_t)x;
-
-	txdata.type = anal_y;
-	txdata.data = (uint8_t)y;
-	sendData42(txdata);
-#endif
 		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
 
   }
@@ -72,6 +64,82 @@ static portTASK_FUNCTION(CheckReflactance, pvParameters) {
 #endif
 		FRTOS1_vTaskDelay(5/TRG_TICKS_MS);
 
+  }
+}
+
+static portTASK_FUNCTION(Remote, pvParameters) {
+	int32_t valMotR = 0;
+	int32_t valMotL = 0;
+	int32_t testi,testii,testi_old,testii_old;
+
+	uint8_t buf[32];
+	CLS1_ConstStdIOTypePtr io = CLS1_GetStdio();
+
+  for(;;) {
+
+#if PL_HAS_REMOTE && PL_HAS_ANALOG_JOY
+	uint8_t x,y;
+	protocol42 txdata;
+
+
+	GetXY(&x,&y);
+
+	txdata.target = isROBOcop;
+	txdata.type = anal_x;
+	txdata.data = x;
+	sendData42(txdata);
+
+	txdata.type = anal_y;
+	txdata.data = y;
+	sendData42(txdata);
+#endif
+#if PL_HAS_MOTOR
+	if(valX > 0) {
+		valMotR = valY-valX;
+		valMotL = valY;
+	}
+	else if (valX < 0) {
+		valMotR = valY;
+		valMotL = valY+valX;
+	}
+	else {
+		valMotR = valY;
+		valMotL = valY;
+	}
+
+	if((valY < 3) && (valY > -3)) {
+		valMotR = 0;
+		valMotL = 0;
+	}
+
+
+	testi = valMotR;
+	testii = valMotL;
+
+	if((testi != testi_old) || (testii != testii_old)) {
+
+		CLS1_SendStr((unsigned char*)"Motor R Value: ", io->stdOut);
+		CLS1_SendNum16s(testi, io->stdOut);
+
+		CLS1_SendStr((unsigned char*)"     Motor L Value: ", io->stdOut);
+		CLS1_SendNum32s(testii, io->stdOut);
+
+		buf[0] = '\0';
+		UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
+		CLS1_SendStr(buf, io->stdOut);
+		testi_old = testi;
+		testii_old = testii;
+	}
+
+
+
+	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), valMotR);
+	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , valMotL);
+
+
+#endif
+
+	FRTOS1_vTaskDelay(20/TRG_TICKS_MS);
   }
 }
 
@@ -88,7 +156,13 @@ void RTOS_Init(void) {
       for(;;){} /* error */
     }
 #if PL_HAS_LINE_SENSOR
-  if (FRTOS1_xTaskCreate(CheckReflactance, (signed portCHAR *)"CheckReflactance", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, checkRefl) != pdPASS) {
+  if (FRTOS1_xTaskCreate(CheckReflactance, (signed portCHAR *)"CheckReflactance", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &checkRefl) != pdPASS) {
+       for(;;){} /* error */
+     }
+#endif
+
+#if PL_HAS_REMOTE
+  if (FRTOS1_xTaskCreate(Remote, (signed portCHAR *)"Remote", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &remoteTask) != pdPASS) {
        for(;;){} /* error */
      }
 #endif

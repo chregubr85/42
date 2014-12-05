@@ -48,8 +48,6 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
 #endif
   uint8_t val;
   protocol42 rxdata;
-  uint16_t test;
-  int16_t test2;
   
   (void)size;
   (void)packet;
@@ -77,9 +75,7 @@ static uint8_t HandleDataRxMessage(RAPP_MSG_Type type, uint8_t size, uint8_t *da
 
     	rxdata.target = (int8_t)*data;
     	rxdata.type = (int8_t)*(data+1);
-    	test = (*(data+2));
-    	test2 = (int16_t)(*(data+2));
-    	rxdata.data = (int16_t)(*(data+2));
+    	rxdata.data = (*(data+2));
 
     	reciveData42(rxdata);
 

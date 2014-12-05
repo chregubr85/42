@@ -115,8 +115,8 @@ void KEY_DisableInterrupts(void) {
 
 #if PL_HAS_ANALOG_JOY
 
-	int8_t ScaleToPercent(uint16_t val, bool x) {
-	  int temp;
+	uint8_t ScaleToU8(uint16_t val, bool x) {
+	  uint8_t temp=0;
 	  uint16_t calib, min;
 
 	if(x){
@@ -127,16 +127,11 @@ void KEY_DisableInterrupts(void) {
 		calib = ycalib;
 		min = ymin;
 	}
-		  if(val < calib){
-			  temp = -100+(100*(val-min))/(calib-min);
-		  }
-		  else if(val > calib){
-			  temp = (100*(val-calib))/(0xffff-calib);
-		  }
-		  else {
-			  temp = 0;
-		  }
-	return (int8_t) temp;
+
+	temp = ((val-min)*0xff)/(0xffff-min);
+
+
+	return temp;
 
 	}
 
@@ -162,16 +157,17 @@ void KEY_DisableInterrupts(void) {
 	  return (int8_t)tmp;
 	}
 
-	void GetXY(int8_t *x, int8_t *y) {
+	void GetXY(uint8_t *x, uint8_t *y) {
 		uint16_t vals[2];
 
 		AD1_Measure(TRUE);
 		AD1_GetValue16(&vals[0]);
 
-		/**x = ScaleToPercent(vals[0], TRUE);
-		*y = ScaleToPercent(vals[1], FALSE);*/
-		*x = ToSigned8Bit(vals[0]);
-		*y = ToSigned8Bit(vals[1]);
+		*x = ScaleToU8(vals[0], TRUE);
+		*y = ScaleToU8(vals[1], FALSE);
+		/* *x = ToSigned8Bit(vals[0]);
+		*y = ToSigned8Bit(vals[1]);*/
+
 
 	}
 
@@ -188,7 +184,7 @@ void KEY_DisableInterrupts(void) {
 
 	 static uint8_t PrintXY(CLS1_ConstStdIOType *io) {
 
-		  int8_t x, y;
+		  uint8_t x, y;
 		  unsigned char buf[64];
 
 		  GetXY(&x, &y);

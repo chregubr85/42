@@ -14,7 +14,8 @@
 #endif
 #include "task.h"
 
-TaskHandle_t checkRefl;
+extern TaskHandle_t checkRefl;
+extern TaskHandle_t remoteTask;
 
 /*! \brief Runs the scheduler */
 void RTOS_Run(void);

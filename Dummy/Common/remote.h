@@ -11,15 +11,18 @@
 #include "platform.h"
 #include "RApp.h"
 #include "RNet_App.h"
+#include "RTOS.h"
 
 #define ADDR_ROBO 42
 #define ADDR_FRDM 43
 
-static bool calibratetY;
+static bool remoteON;
+static bool calibratetY, calibratetX;
+
+int32_t valX, valY;
 
 typedef enum{
-	duty_left,
-	duty_right,
+	activateRemote,
 	anal_x, //HIHI ANAL
 	anal_y
 } protocol42_type;
@@ -33,19 +36,19 @@ typedef enum{
 typedef struct{
 	targetPL target;
 	protocol42_type type;
-	int16_t data;
+	uint8_t data;
 } protocol42;
 
-
-/*static protocol42 txdata = {
-		isROBOcop,
-		duty_left,
-		0
-};*/
 
 void sendData42(protocol42 txdata);
 
 void reciveData42(protocol42 rxdata);
+
+int32_t u8To32s(uint8_t val, bool x);
+
+int8_t ScaleToPercent(uint8_t val, bool x);
+
+void remoteInit(void);
 
 
 #endif /* REMOTE_H_ */
