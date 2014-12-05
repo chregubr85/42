@@ -94,9 +94,9 @@
 #if PL_HAS_ACCEL
 	#include "Accel.h"
 #endif
-#if PL_HAS_FIGHT
+//#if PL_HAS_FIGHT
 	#include "Fight.h"
-#endif
+//#endif
 
 #if PL_HAS_REMOTE
 	#include "remote.h"

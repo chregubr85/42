@@ -29,7 +29,7 @@ typedef enum {
 
 } KEY_Buttons;
 
-static volatile uint16_t xcalib, ycalib;
+extern uint16_t xcalib, ycalib;
 
 #if PL_NOF_KEYS>=1
   #include "SW1.h"
@@ -115,10 +115,7 @@ void KEY_OnInterrupt(KEY_Buttons button);
 #if PL_HAS_ANALOG_JOY
 	#include "AD1.h"
 
-static int8_t ToSigned8Bit(uint16_t val);
-
-
-
+    int8_t ToSigned8Bit(uint16_t val);
 
 	void GetXY(uint8_t *x, uint8_t *y);
 

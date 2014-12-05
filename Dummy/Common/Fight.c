@@ -1,4 +1,9 @@
 #include "Fight.h"
+#if PL_HAS_REMOTE
+	bool fightOn;
+#endif
+
+
 #if PL_IS_ROBO
 
 /*typedef enum Fightstat {
@@ -15,7 +20,7 @@
 
 Fightstate fight_state = SEARCH_ENEMY;
 static uint16_t cm, us;
-bool fightOn;
+
 
 static MOT_SpeedPercent speed=20;
 static uint32_t i;
@@ -30,21 +35,12 @@ typedef struct Fight_FSM{
 static  Fight_FSM fight_fsm;
 */
 
-static portTASK_FUNCTION(Fight_modus, pvParameters) {
-  (void)pvParameters; /* not used */
-  DRV_EnableDisable(FALSE);
-  DRV_EnableDisablePos(FALSE);
-  fight_state = FIND_ENEMY;
-  for(;;) {
 
-	  FightmodusV2();
-	  FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
-  }
-}
 
 
 void FIGHT_Init(void) {
-
+	fightOn = FALSE;
+	FRTOS1_vTaskSuspend(fightTask);
 
 }
 
@@ -102,6 +98,8 @@ void Fightmodus(void){
 }
 
 void FightmodusV2(void){
+	uint16_t test = 0;
+
 	switch(fight_state){
 		case FIND_ENEMY:
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 20);
@@ -119,18 +117,28 @@ void FightmodusV2(void){
 			}
 			break;
 		case DRIVE_DIRECT:
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 80);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 80);
-			fight_state = SEARCH_ENEMY;
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 50);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 50);
+			//fight_state = SEARCH_ENEMY;
 			break;
 		case WHITE_LINE_DETECTION:
+
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -30);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -30);
+			vTaskDelay(500/TRG_TICKS_MS);
+
+			fight_state = FIND_ENEMY;
+			FRTOS1_vTaskResume(checkRefl);
+
+
+			/*
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -80);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -80);
 			for(i=0;i<1000000;i++);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 			FRTOS1_vTaskResume(checkRefl);
-			fight_state = FIND_ENEMY;
+			fight_state = FIND_ENEMY;*/
 			//DRV_EnableDisablePos(TRUE);
 			//DRV_SetPos(-1000);
 

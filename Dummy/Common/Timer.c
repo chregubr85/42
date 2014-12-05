@@ -16,6 +16,7 @@
 #include "Trigger.h"
 #endif
 
+uint16 time;
 
 void TMR_OnInterrupt(void) {
 

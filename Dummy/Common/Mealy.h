@@ -20,7 +20,7 @@ typedef enum MealyStates{
 	StateThree //Go on
 }MealyStates_t;
 
-static MealyStates_t MyState;
+extern MealyStates_t MyState;
 
 
 /*! \brief This implements our Mealy Sequential Machine. On each call the FSM will perform a check/test advances as necessary. */

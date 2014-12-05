@@ -13,6 +13,9 @@
 #if PL_HAS_MEALY
 	#include "Mealy.h"
 
+MealyStates_t MyState;
+
+
 void MEALY_Step(void){
 	switch (MyState) {
 	case StateInit:

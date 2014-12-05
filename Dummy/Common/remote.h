@@ -16,13 +16,14 @@
 #define ADDR_ROBO 42
 #define ADDR_FRDM 43
 
-static bool remoteON;
-static bool calibratetY, calibratetX;
+extern bool remoteOn;
+extern bool calibratetY, calibratetX;
 
 int32_t valX, valY;
 
 typedef enum{
 	activateRemote,
+	activateFight,
 	anal_x, //HIHI ANAL
 	anal_y
 } protocol42_type;

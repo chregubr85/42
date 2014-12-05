@@ -18,6 +18,7 @@
   #include "KeyDebounce.h"
 #endif
 
+ uint16_t xcalib, ycalib;
 
 void KEY_Scan(void) {
 #if PL_HAS_JOYSTICK
@@ -145,7 +146,7 @@ void KEY_DisableInterrupts(void) {
 			ycalib=(vals[1]);
 		}
 
-	static int8_t ToSigned8Bit(uint16_t val) {
+	int8_t ToSigned8Bit(uint16_t val) {
 	  int tmp;
 
 	  tmp = ((int)((val>>8)&0xFF))-127;

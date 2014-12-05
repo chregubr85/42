@@ -39,6 +39,9 @@ static portTASK_FUNCTION(T1, pvParameters) {
 	AD1_Calibrate(TRUE);
 	CalibXY();
 #endif
+#if PL_HAS_FIGHT
+	FIGHT_Init();
+#endif
   for(;;) {
 	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
     FRTOS1_vTaskDelay(1000/TRG_TICKS_MS);
@@ -49,10 +52,6 @@ static portTASK_FUNCTION(App_loop, pvParameters) {
   for(;;) {
 		KEY_Scan();
 		EVNT_HandleEvent(APP_HandleEvent ) ;
-#if PL_HAS_LINE_SENSOR
-	REF_Danger();
-#endif
-
 		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
 
   }
@@ -141,6 +140,18 @@ static portTASK_FUNCTION(Remote, pvParameters) {
 #endif
 
 	FRTOS1_vTaskDelay(20/TRG_TICKS_MS);
+  }
+}
+
+static portTASK_FUNCTION(Fight_modus, pvParameters) {
+
+  DRV_EnableDisable(FALSE);
+  DRV_EnableDisablePos(FALSE);
+  fight_state = FIND_ENEMY;
+  for(;;) {
+
+	  FightmodusV2();
+	  FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
   }
 }
 

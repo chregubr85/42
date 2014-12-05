@@ -16,7 +16,7 @@
 #define TMR_TICK_MS  1
 #endif
 
-static uint16 time;
+extern uint16 time;
 
 
 /*! \brief Function called from timer interrupt every TMR_TICK_MS. */

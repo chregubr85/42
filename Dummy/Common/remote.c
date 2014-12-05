@@ -12,7 +12,11 @@
 #include "Keys.h"
 #include "Motor.h"
 #include "Event.h"
+#include "Fight.h"
 
+
+bool remoteOn;
+bool calibratetY, calibratetX;
 
 void sendData42(protocol42 txdata){
 	uint8_t dest;
@@ -40,14 +44,27 @@ void reciveData42(protocol42 rxdata){
 
 	typ = rxdata.type;
 	switch (typ) {
+
+	case activateFight:
+
+		if(!fightOn) {
+			fightOn = TRUE;
+			EVNT_SetEvent(EVNT_FIGHTMODE_ACTIVATE);
+		}
+		else {
+			fightOn = FALSE;
+			EVNT_SetEvent(EVNT_FIGHTMODE_DEACTIVATE);
+		}
+		break;
+
 	case activateRemote:
 
-		if(!remoteON) {
-			remoteON = TRUE;
+		if(!remoteOn) {
+			remoteOn = TRUE;
 			EVNT_SetEvent(EVNT_REMOTE_ACTIVATE);
 		}
 		else {
-			remoteON = FALSE;
+			remoteOn = FALSE;
 			EVNT_SetEvent(EVNT_REMOTE_DEACTIVATE);
 		}
 
@@ -150,7 +167,7 @@ int8_t ScaleToPercent(uint8_t val, bool x) {
 }
 
 void remoteInit(void) {
-	remoteON = FALSE;
+	remoteOn = FALSE;
 	FRTOS1_vTaskSuspend(remoteTask);
 }
 

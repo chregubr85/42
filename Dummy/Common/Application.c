@@ -41,10 +41,6 @@ void APP_start(void){
 #if PL_HAS_ACCEL
 	ACCEL_Init();
 #endif
-#if PL_HAS_FIGHT
-	FIGHT_Init();
-#endif
-
 #if PL_HAS_RTOS
 	RTOS_Init();
 	#if PL_HAS_SEMAPHORE
@@ -121,9 +117,12 @@ void APP_HandleEvent(EVNT_Handle event){
 			break;
 #if PL_HAS_MOTOR
 	case EVNT_DONT_FALL_DOWN:
-		aleft = *DRV_GetSpeedLeft();
-		brigth = *DRV_GetSpeedRight();
-		DRV_SetSpeed(-aleft,-brigth);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -30);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -30);
+		vTaskDelay(500/TRG_TICKS_MS);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+		FRTOS1_vTaskResume(checkRefl);
 		break;
 #endif
 
@@ -165,12 +164,12 @@ void APP_HandleEvent(EVNT_Handle event){
 				txdata.target = isROBOcop;
 				txdata.type = activateRemote;
 				sendData42(txdata);
-				if(!remoteON) {
-					remoteON = TRUE;
+				if(!remoteOn) {
+					remoteOn = TRUE;
 					EVNT_SetEvent(EVNT_REMOTE_ACTIVATE);
 				}
 				else {
-					remoteON = FALSE;
+					remoteOn = FALSE;
 					EVNT_SetEvent(EVNT_REMOTE_DEACTIVATE);
 				}
 		#endif
@@ -182,6 +181,19 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_F_PRESSED:
+		#if PL_HAS_REMOTE
+		txdata.target = isROBOcop;
+		txdata.type = activateFight;
+		sendData42(txdata);
+		if(!fightOn) {
+			fightOn = TRUE;
+			EVNT_SetEvent(EVNT_FIGHTMODE_ACTIVATE);
+		}
+		else {
+			fightOn = FALSE;
+			EVNT_SetEvent(EVNT_FIGHTMODE_DEACTIVATE);
+		}
+		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
@@ -204,6 +216,16 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case EVNT_REMOTE_DEACTIVATE:
 			FRTOS1_vTaskSuspend(remoteTask);
+		break;
+#endif
+#if PL_HAS_FIGHT
+	case EVNT_FIGHTMODE_ACTIVATE:
+			FRTOS1_vTaskResume(fightTask);
+		break;
+	case EVNT_FIGHTMODE_DEACTIVATE:
+			FRTOS1_vTaskSuspend(fightTask);
+		  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
+		  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 		break;
 #endif
 	default:
