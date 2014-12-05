@@ -1,20 +1,24 @@
 #include "Fight.h"
+#if PL_IS_ROBO
 
-typedef enum Fightstat {
+/*typedef enum Fightstat {
   DRIVE_DIRECT = 0,
   DRIVE_RIGHT,
   DRIVE_LEFT,
   TURN_RIGHT,
   TURN_LEFT,
   WHITE_LINE_DETECTION,
-  SEARCH_ENEMIE,
-  FIND_ENEMIE
-} Fightstate;
+  SEARCH_ENEMY,
+  FIND_ENEMY,
+  IDLE
+} Fightstate;*/
 
-static volatile Fightstate figth_state = SEARCH_ENEMIE; /* state machine state */
+Fightstate fight_state = SEARCH_ENEMY;
 static uint16_t cm, us;
+bool fightOn;
 
 static MOT_SpeedPercent speed=20;
+static uint32_t i;
 
 
 /*
@@ -28,9 +32,12 @@ static  Fight_FSM fight_fsm;
 
 static portTASK_FUNCTION(Fight_modus, pvParameters) {
   (void)pvParameters; /* not used */
+  DRV_EnableDisable(FALSE);
+  DRV_EnableDisablePos(FALSE);
+  fight_state = FIND_ENEMY;
   for(;;) {
 
-	  Fightmodus();
+	  FightmodusV2();
 	  FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
   }
 }
@@ -38,16 +45,14 @@ static portTASK_FUNCTION(Fight_modus, pvParameters) {
 
 void FIGHT_Init(void) {
 
-  if(FRTOS1_xTaskCreate(Fight_modus,(signed portCHAR *) "Fight_m", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
-    for(;;){} /* error */
-  }
+
 }
 
 
 
 void Fightmodus(void){
 
-	switch(figth_state){
+	switch(fight_state){
 	case DRIVE_DIRECT:
 	  	  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), speed);
 	  	  MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), speed);
@@ -68,7 +73,7 @@ void Fightmodus(void){
 
 		break;
 
-	case SEARCH_ENEMIE:
+	case SEARCH_ENEMY:
 
 
 	  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 20);
@@ -78,10 +83,10 @@ void Fightmodus(void){
 		cm = US_usToCentimeters(us, 22);
 
 		if((cm<50)&&(cm>3)){
-			figth_state=FIND_ENEMIE;
+			fight_state=FIND_ENEMY;
 		}
 		break;
-	case FIND_ENEMIE:
+	case FIND_ENEMY:
 
 		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 80);
 		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 80);
@@ -90,11 +95,55 @@ void Fightmodus(void){
 		us = US_Measure_us();
 		cm = US_usToCentimeters(us, 22);
 		if((cm>50)){
-			figth_state=SEARCH_ENEMIE;
+			fight_state=SEARCH_ENEMY;
 		}
 		break;
 	}
 }
 
+void FightmodusV2(void){
+	switch(fight_state){
+		case FIND_ENEMY:
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 20);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -20);
+			fight_state = SEARCH_ENEMY;
+			break;
+		case SEARCH_ENEMY:
+			us = US_Measure_us();
+			cm = US_usToCentimeters(us, 22);
+
+			if((cm<50)&&(cm>3)){
+				fight_state=DRIVE_DIRECT;
+			}else{
+				fight_state = FIND_ENEMY;
+			}
+			break;
+		case DRIVE_DIRECT:
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 80);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 80);
+			fight_state = SEARCH_ENEMY;
+			break;
+		case WHITE_LINE_DETECTION:
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -80);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -80);
+			for(i=0;i<1000000;i++);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+			FRTOS1_vTaskResume(checkRefl);
+			fight_state = FIND_ENEMY;
+			//DRV_EnableDisablePos(TRUE);
+			//DRV_SetPos(-1000);
+
+			break;
+		case IDLE:
+			//do nothing
+			break;
+		default:
+
+			break;
+	}
+
+}
+#endif
 
 

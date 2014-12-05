@@ -16,6 +16,8 @@
 
 extern TaskHandle_t checkRefl;
 extern TaskHandle_t remoteTask;
+extern TaskHandle_t fightTask;
+
 
 /*! \brief Runs the scheduler */
 void RTOS_Run(void);

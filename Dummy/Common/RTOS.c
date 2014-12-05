@@ -25,6 +25,7 @@
 
 TaskHandle_t checkRefl;
 TaskHandle_t remoteTask;
+TaskHandle_t fightTask;
 
 
 static portTASK_FUNCTION(T1, pvParameters) {
@@ -167,6 +168,11 @@ void RTOS_Init(void) {
      }
 #endif
 
+#if PL_HAS_FIGHT
+  if(FRTOS1_xTaskCreate(Fight_modus,(signed portCHAR *) "Fight_m", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &fightTask) != pdPASS) {
+      for(;;){} /* error */
+    }
+#endif
 }
 
 void RTOS_Deinit(void) {

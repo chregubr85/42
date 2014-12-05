@@ -24,6 +24,9 @@
 #include "Event.h"
 #include "Shell.h"
 #include "Trigger.h"
+#include "RTOS.h"
+#include "Fight.h"
+
 #if PL_HAS_MOTOR
 	#include "Motor.h"
 #endif
@@ -164,9 +167,12 @@ void REF_Danger(void){
 				if(SensorCalibrated[i] < 1000-THRESHOLD_BLK && SensorCalibrated[i]!=0 ){
 					sensor = i;
 
-				//    MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , -MOT_GetMotorHandle(MOT_MOTOR_LEFT)->currPWMvalue);
-				//	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -MOT_GetMotorHandle(MOT_MOTOR_RIGHT)->currPWMvalue);
+				    MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , 0);
+					MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 					EVNT_SetEvent(EVNT_DONT_FALL_DOWN);
+
+					FRTOS1_vTaskSuspend(checkRefl);
+					fight_state = WHITE_LINE_DETECTION;
 					//while(SensorCalibrated[sensor] < 1000-THRESHOLD_BLK ){
 
 					//}
