@@ -155,6 +155,19 @@ static portTASK_FUNCTION(Fight_modus, pvParameters) {
   }
 }
 
+#if PL_HAS_ACCEL
+static portTASK_FUNCTION(AccelObserv, pvParameters) {
+	int16_t x,y,z;
+	for(;;) {
+		ACCEL_GetValues(&x, &y, &z);
+		if(z < 800 ){
+			EVNT_SetEvent(EVNT_FREEFALL);
+		}
+		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
+	}
+}
+#endif
+
 void RTOS_Run(void) {
   FRTOS1_vTaskStartScheduler();
 }
@@ -181,6 +194,12 @@ void RTOS_Init(void) {
 
 #if PL_HAS_FIGHT
   if(FRTOS1_xTaskCreate(Fight_modus,(signed portCHAR *) "Fight_m", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &fightTask) != pdPASS) {
+      for(;;){} /* error */
+    }
+#endif
+
+#if PL_HAS_ACCEL
+  if(FRTOS1_xTaskCreate(AccelObserv,(signed portCHAR *) "AccelObserv", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &fightTask) != pdPASS) {
       for(;;){} /* error */
     }
 #endif

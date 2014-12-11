@@ -98,6 +98,10 @@ typedef enum EVNT_Handle {
 	  EVNT_DONT_FALL_DOWN,
 #endif
 
+#if PL_HAS_ACCEL
+	  EVNT_FREEFALL,
+#endif
+
   EVNT_LED_HEARTBEAT,
   EVNT_NOF_EVENTS      /*!< Must be last one! */
 } EVNT_Handle;
