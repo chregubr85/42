@@ -144,14 +144,14 @@ static portTASK_FUNCTION(Remote, pvParameters) {
 }
 
 static portTASK_FUNCTION(Fight_modus, pvParameters) {
-
-  DRV_EnableDisable(FALSE);
-  DRV_EnableDisablePos(FALSE);
+#if PL_HAS_DRIVE
+	  DRV_EnableDisable(FALSE);
+	  DRV_EnableDisablePos(FALSE);
+#endif
   fight_state = FIND_ENEMY;
   for(;;) {
-
-	  FightmodusV2();
 	  FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
+	  FightmodusV2();
   }
 }
 

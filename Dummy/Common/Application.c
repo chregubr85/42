@@ -91,7 +91,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		#if PL_IS_ROBO
 	case  EVNT_BTN:
 	//	MEALY_Step();
-		for(int i =0; i < 4; i++){
+		for(int i =0; i < 10; i++){
 			BUZ_Beep(freq,duration);
 			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
 			//WAIT1_Waitms(duration);
@@ -108,6 +108,8 @@ void APP_HandleEvent(EVNT_Handle event){
 			FRTOS1_vTaskDelay(duration/TRG_TICKS_MS);
 			//WAIT1_Waitms(duration);
 		}
+		fightOn = TRUE;
+		FRTOS1_vTaskResume(fightTask);
 			break;
 	case EVNT_BTN_LPRESSED:
 		#if PL_HAS_LINE_SENSOR
@@ -117,8 +119,8 @@ void APP_HandleEvent(EVNT_Handle event){
 			break;
 #if PL_HAS_MOTOR
 	case EVNT_DONT_FALL_DOWN:
-		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -30);
-		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -30);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -0);
+		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -0);
 		vTaskDelay(500/TRG_TICKS_MS);
 		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
 		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);

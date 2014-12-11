@@ -116,24 +116,7 @@ static portTASK_FUNCTION(DriveTask, pvParameters) {
             } else{
           	  sR = DRV_PosRight;
             }
-      //sL = DRV_PosLeft;
-      //sR = DRV_PosRight;
-      /*if(sL != DRV_PosLeft){
-    	  if((DRV_PosLeft-PosL)>0){
-    		  sL += DRV_PosLeft>>10;
-    	  } else{
-    		  sL -= DRV_PosLeft>>10;
-    	  }
-      }
-      if(sR != DRV_PosRight){
-    	  if((DRV_PosRight-PosR)>0){
-    	  	  sR += DRV_PosRight>>10;
-    	  } else{
-    	      sR -= DRV_PosRight>>10;
-    	  }
-      }*/
-      //dL = (DRV_PosLeft-PosL);
-      //dR = (DRV_PosRight-PosR);
+
 
       PID_Pos(PosL, sL, TRUE);		//left
       PID_Pos(PosR, sR, FALSE);	//right

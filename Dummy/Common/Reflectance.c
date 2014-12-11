@@ -144,7 +144,7 @@ static void REF_MeasureRaw(SensorTimeType raw[REF_NOF_SENSORS]) {
         	FRTOS1_taskEXIT_CRITICAL();
         }
         cntTimeOUt++;
-        if(cntTimeOUt >= 100*REF_NOF_SENSORS){
+        if(cntTimeOUt >= 50*REF_NOF_SENSORS){
       	  return;
         }
       } else { /* have value */

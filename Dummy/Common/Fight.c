@@ -74,7 +74,7 @@ void Fightmodus(void){
 
 	  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 20);
 	  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -20);
-		DRV_Turn(360, 0);
+		//DRV_Turn(360, 0);
 		us = US_Measure_us();
 		cm = US_usToCentimeters(us, 22);
 
@@ -102,8 +102,8 @@ void FightmodusV2(void){
 
 	switch(fight_state){
 		case FIND_ENEMY:
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 20);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -20);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 30);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -30);
 			fight_state = SEARCH_ENEMY;
 			break;
 		case SEARCH_ENEMY:
@@ -117,30 +117,21 @@ void FightmodusV2(void){
 			}
 			break;
 		case DRIVE_DIRECT:
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 50);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 50);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 85);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 85);
 			//fight_state = SEARCH_ENEMY;
 			break;
 		case WHITE_LINE_DETECTION:
 
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -30);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -30);
-			vTaskDelay(500/TRG_TICKS_MS);
-
-			fight_state = FIND_ENEMY;
-			FRTOS1_vTaskResume(checkRefl);
-
-
-			/*
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), -80);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), -80);
-			for(i=0;i<1000000;i++);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
-			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+			vTaskDelay(500/TRG_TICKS_MS);
+
+
 			FRTOS1_vTaskResume(checkRefl);
-			fight_state = FIND_ENEMY;*/
-			//DRV_EnableDisablePos(TRUE);
-			//DRV_SetPos(-1000);
+			vTaskDelay(100/TRG_TICKS_MS);
+			fight_state = FIND_ENEMY;
+
 
 			break;
 		case IDLE:
