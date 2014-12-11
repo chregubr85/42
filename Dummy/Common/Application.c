@@ -230,6 +230,16 @@ void APP_HandleEvent(EVNT_Handle event){
 		  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 		break;
 #endif
+#if PL_HAS_ACCEL
+	case EVNT_FREEFALL:
+			FRTOS1_vTaskSuspend(fightTask);
+			FRTOS1_vTaskSuspend(remoteTask);
+			vTaskDelay(100/TRG_TICKS_MS);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
+			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+			vTaskDelay(100/TRG_TICKS_MS);
+		break;
+#endif
 	default:
 		break;
 
