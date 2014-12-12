@@ -140,7 +140,9 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case  EVNT_BTN_BLUE_PRESSED:
 		#if PL_HAS_REMOTE
-			EVNT_SetEvent(EVNT_GO_FAST_FW);
+			txdata.target = isROBOcop;
+			txdata.type = goFastFW;
+			sendData42(txdata);
 		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();

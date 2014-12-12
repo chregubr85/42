@@ -70,6 +70,12 @@ void reciveData42(protocol42 rxdata){
 
 		break;
 
+	case goFastFW:
+
+		EVNT_SetEvent(EVNT_GO_FAST_FW);
+
+		break;
+
 	case anal_x:
 		if (!calibratetX) {
 			xcalib = rxdata.data;

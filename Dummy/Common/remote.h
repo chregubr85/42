@@ -24,6 +24,7 @@ int32_t valX, valY;
 typedef enum{
 	activateRemote,
 	activateFight,
+	goFastFW,
 	anal_x, //HIHI ANAL
 	anal_y,
 	accel_x,
