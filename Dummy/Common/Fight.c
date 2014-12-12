@@ -24,7 +24,7 @@ static uint16_t cm, us;
 
 static MOT_SpeedPercent speed=20;
 static uint32_t i;
-
+static int16_t iter;
 
 /*
 typedef struct Fight_FSM{
@@ -99,7 +99,6 @@ void Fightmodus(void){
 
 void FightmodusV2(void){
 	uint16_t test = 0;
-
 	if(fightOn){
 	switch(fight_state){
 		case FIND_ENEMY:
@@ -110,11 +109,12 @@ void FightmodusV2(void){
 		case SEARCH_ENEMY:
 			us = US_Measure_us();
 			cm = US_usToCentimeters(us, 22);
-
-			if((cm<50)&&(cm>3)){
+			if(++iter > 200){
+				fight_state = DRIVE_DIRECT;
+				iter = 0;
+			}
+			else if((cm<50)&&(cm>3)){
 				fight_state=DRIVE_DIRECT;
-			}else{
-				fight_state = FIND_ENEMY;
 			}
 			break;
 		case DRIVE_DIRECT:

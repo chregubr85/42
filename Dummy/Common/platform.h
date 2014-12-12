@@ -123,10 +123,11 @@
 	#define PL_HAS_DRIVE 1
 	#define PL_HAS_PID 1
 	#define PL_HAS_ULTRASONIC 1
-	#define PL_HAS_ACCEL 1
+	#define PL_HAS_ACCEL 0
 	#define PL_HAS_RADIO 1
 	#define PL_HAS_REMOTE 1
 	#define PL_HAS_FIGHT 1
+	#define REMOTE_WITHOUT_REFLECTANCE 1
 
 #else
 	#error "unknown board?"

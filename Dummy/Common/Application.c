@@ -215,6 +215,9 @@ void APP_HandleEvent(EVNT_Handle event){
 #if PL_HAS_REMOTE
 	case EVNT_REMOTE_ACTIVATE:
 			FRTOS1_vTaskResume(remoteTask);
+			#if REMOTE_WITHOUT_REFLECTANCE
+				FRTOS1_vTaskSuspend(checkRefl);
+			#endif
 		break;
 	case EVNT_REMOTE_DEACTIVATE:
 			FRTOS1_vTaskSuspend(remoteTask);
@@ -222,6 +225,8 @@ void APP_HandleEvent(EVNT_Handle event){
 #endif
 #if PL_HAS_FIGHT
 	case EVNT_FIGHTMODE_ACTIVATE:
+			FRTOS1_vTaskResume(checkRefl);
+			vTaskDelay(100/TRG_TICKS_MS);
 			FRTOS1_vTaskResume(fightTask);
 		break;
 	case EVNT_FIGHTMODE_DEACTIVATE:
@@ -230,7 +235,7 @@ void APP_HandleEvent(EVNT_Handle event){
 		  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 		break;
 #endif
-#if PL_HAS_ACCEL
+#if PL_HAS_ACCEL && PL_IS_ROBO
 	case EVNT_FREEFALL:
 			FRTOS1_vTaskSuspend(fightTask);
 			fightOn = FALSE;

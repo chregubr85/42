@@ -42,6 +42,9 @@ static portTASK_FUNCTION(T1, pvParameters) {
 #if PL_HAS_FIGHT
 	FIGHT_Init();
 #endif
+#if REMOTE_WITHOUT_REFLECTANCE
+	FRTOS1_vTaskSuspend(checkRefl);
+#endif
   for(;;) {
 	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
     FRTOS1_vTaskDelay(1000/TRG_TICKS_MS);
@@ -179,7 +182,7 @@ void RTOS_Init(void) {
     }
 #endif
 
-#if PL_HAS_ACCEL
+#if PL_HAS_ACCEL && PL_IS_ROBO
   if(FRTOS1_xTaskCreate(AccelObserv,(signed portCHAR *) "AccelObserv", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
       for(;;){} /* error */
     }
