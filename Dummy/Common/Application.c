@@ -233,7 +233,9 @@ void APP_HandleEvent(EVNT_Handle event){
 #if PL_HAS_ACCEL
 	case EVNT_FREEFALL:
 			FRTOS1_vTaskSuspend(fightTask);
+			fightOn = FALSE;
 			FRTOS1_vTaskSuspend(remoteTask);
+			remoteOn = FALSE;
 			vTaskDelay(100/TRG_TICKS_MS);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);

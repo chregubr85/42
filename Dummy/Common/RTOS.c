@@ -70,10 +70,7 @@ static portTASK_FUNCTION(CheckReflactance, pvParameters) {
 static portTASK_FUNCTION(Remote, pvParameters) {
 	int32_t valMotR = 0;
 	int32_t valMotL = 0;
-	int32_t testi,testii,testi_old,testii_old;
 
-	uint8_t buf[32];
-	CLS1_ConstStdIOTypePtr io = CLS1_GetStdio();
 
   for(;;) {
 
@@ -113,26 +110,6 @@ static portTASK_FUNCTION(Remote, pvParameters) {
 	}
 
 
-	testi = valMotR;
-	testii = valMotL;
-
-	if((testi != testi_old) || (testii != testii_old)) {
-
-		CLS1_SendStr((unsigned char*)"Motor R Value: ", io->stdOut);
-		CLS1_SendNum16s(testi, io->stdOut);
-
-		CLS1_SendStr((unsigned char*)"     Motor L Value: ", io->stdOut);
-		CLS1_SendNum32s(testii, io->stdOut);
-
-		buf[0] = '\0';
-		UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
-		CLS1_SendStr(buf, io->stdOut);
-		testi_old = testi;
-		testii_old = testii;
-	}
-
-
-
 	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), valMotR);
 	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT) , valMotL);
 
@@ -149,18 +126,22 @@ static portTASK_FUNCTION(Fight_modus, pvParameters) {
 	  DRV_EnableDisablePos(FALSE);
 #endif
   fight_state = FIND_ENEMY;
+  FRTOS1_vTaskDelay(100/TRG_TICKS_MS);
   for(;;) {
 	  FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
 	  FightmodusV2();
   }
 }
 
-#if PL_HAS_ACCEL
+#if PL_HAS_ACCEL && PL_IS_ROBO
 static portTASK_FUNCTION(AccelObserv, pvParameters) {
-	int16_t x,y,z;
+
 	for(;;) {
+		static int16_t x,y,z;
+
 		ACCEL_GetValues(&x, &y, &z);
-		if(z < 800 ){
+
+		if(z < -200){
 			EVNT_SetEvent(EVNT_FREEFALL);
 		}
 		FRTOS1_vTaskDelay(10/TRG_TICKS_MS);
@@ -199,7 +180,7 @@ void RTOS_Init(void) {
 #endif
 
 #if PL_HAS_ACCEL
-  if(FRTOS1_xTaskCreate(AccelObserv,(signed portCHAR *) "AccelObserv", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, &fightTask) != pdPASS) {
+  if(FRTOS1_xTaskCreate(AccelObserv,(signed portCHAR *) "AccelObserv", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL) != pdPASS) {
       for(;;){} /* error */
     }
 #endif

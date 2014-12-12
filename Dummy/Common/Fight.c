@@ -100,6 +100,7 @@ void Fightmodus(void){
 void FightmodusV2(void){
 	uint16_t test = 0;
 
+	if(fightOn){
 	switch(fight_state){
 		case FIND_ENEMY:
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 30);
@@ -142,6 +143,7 @@ void FightmodusV2(void){
 			break;
 	}
 
+}
 }
 #endif
 
