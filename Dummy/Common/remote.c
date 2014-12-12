@@ -75,7 +75,7 @@ void reciveData42(protocol42 rxdata){
 			xcalib = rxdata.data;
 			calibratetX = TRUE;
 		}
-		valX = (ScaleToPercent(rxdata.data, TRUE, TRUE)>>1);
+		valX = (ScaleToPercent(rxdata.data, TRUE, TRUE));
 
 		break;
 	case anal_y:
@@ -161,6 +161,20 @@ int8_t ScaleToPercent(uint8_t val, bool x, bool isAnalog) {
 	  }
 
 	  return temp;
+}
+
+uint8_t scaleFromAccelToU8(int16_t val){
+	uint8_t temp = 0;
+	if(val < 0){
+		temp = (127*(val+1000))/1000;
+	}
+	else if(val > 0) {
+		temp = 127+(((255-127)*val)/1000);
+	}
+	else{
+		temp = 127;
+	}
+	return temp;
 }
 
 void remoteInit(void) {

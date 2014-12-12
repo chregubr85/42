@@ -30,6 +30,10 @@ TaskHandle_t checkRefl;
 TaskHandle_t remoteTask;
 TaskHandle_t fightTask;
 
+uint8_t x_anal,y_anal;
+uint8_t x_accel, y_accel;
+int16_t x_ac, y_ac;
+
 
 static portTASK_FUNCTION(T1, pvParameters) {
 #if PL_HAS_ACCEL
@@ -82,10 +86,7 @@ static portTASK_FUNCTION(Remote, pvParameters) {
 
 #if PL_HAS_REMOTE && PL_IS_FRDM
 
-	uint8_t x_anal,y_anal;
-	uint8_t x_accel, y_accel;
-	int16_t x_ac, y_ac;
-	uint8_t testx, testy;
+
 	protocol42 txdata;
 
 if (analogOn) {
@@ -101,13 +102,12 @@ if (analogOn) {
 		sendData42(txdata);
 }
 if (accelOn){
-	testx = MMA1_MeasureGetRawX();//MMA1_GetXmg();
-	//testx = x_ac>>8;
-	testy = MMA1_MeasureGetRawY();
-	//testy = x_ac>>8;
+	x_ac = MMA1_GetXmg();
+	y_ac = MMA1_GetYmg();
 
-	x_accel = ScaleToU8(testx,TRUE);
-	y_accel = ScaleToU8(testy,FALSE);;
+
+	x_accel = scaleFromAccelToU8(x_ac);
+	y_accel = scaleFromAccelToU8(y_ac);
 
 
 	txdata.target = isROBOcop;

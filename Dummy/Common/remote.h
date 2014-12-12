@@ -51,6 +51,8 @@ int32_t u8To32s(uint8_t val, bool x);
 
 int8_t ScaleToPercent(uint8_t val, bool x, bool isAnalog);
 
+uint8_t scaleFromAccelToU8(int16_t val);
+
 void remoteInit(void);
 
 
