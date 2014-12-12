@@ -45,6 +45,9 @@ static portTASK_FUNCTION(T1, pvParameters) {
 #if PL_HAS_FIGHT
 	FIGHT_Init();
 #endif
+#if REMOTE_WITHOUT_REFLECTANCE
+	FRTOS1_vTaskSuspend(checkRefl);
+#endif
   for(;;) {
 	EVNT_SetEvent(EVNT_LED_HEARTBEAT);
     FRTOS1_vTaskDelay(1000/TRG_TICKS_MS);
