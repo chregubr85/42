@@ -109,6 +109,7 @@ void APP_HandleEvent(EVNT_Handle event){
 			//WAIT1_Waitms(duration);
 		}
 		fightOn = TRUE;
+		FRTOS1_vTaskResume(checkRefl);
 		FRTOS1_vTaskResume(fightTask);
 			break;
 	case EVNT_BTN_LPRESSED:
