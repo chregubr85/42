@@ -139,6 +139,9 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_BLUE_PRESSED:
+		#if PL_HAS_REMOTE
+			EVNT_SetEvent(EVNT_GO_FAST_FW);
+		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
@@ -273,6 +276,15 @@ void APP_HandleEvent(EVNT_Handle event){
 			vTaskDelay(100/TRG_TICKS_MS);*/
 		break;
 #endif
+	case EVNT_GO_FAST_FW:
+			#if PL_HAS_REMOTE && PL_HAS_MOTOR
+		  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 100);
+		  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 100);
+		  		vTaskDelay(500/TRG_TICKS_MS);
+			#endif
+		break;
+
+
 	default:
 		break;
 
