@@ -166,9 +166,6 @@ void KEY_DisableInterrupts(void) {
 
 		*x = ScaleToU8(vals[0], TRUE);
 		*y = ScaleToU8(vals[1], FALSE);
-		/* *x = ToSigned8Bit(vals[0]);
-		*y = ToSigned8Bit(vals[1]);*/
-
 
 	}
 

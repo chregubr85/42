@@ -21,6 +21,9 @@
 	#include "RNet_App.h"
 	#include "RApp.h"
 	#include "remote.h"
+	#if PL_HAS_ACCEL
+		#include "MMA1.h"
+	#endif
 #endif
 
 TaskHandle_t checkRefl;
@@ -77,21 +80,46 @@ static portTASK_FUNCTION(Remote, pvParameters) {
 
   for(;;) {
 
-#if PL_HAS_REMOTE && PL_HAS_ANALOG_JOY
-	uint8_t x,y;
+#if PL_HAS_REMOTE && PL_IS_FRDM
+
+	uint8_t x_anal,y_anal;
+	uint8_t x_accel, y_accel;
+	int16_t x_ac, y_ac;
+	uint8_t testx, testy;
 	protocol42 txdata;
 
+if (analogOn) {
+		GetXY(&x_anal,&y_anal);
 
-	GetXY(&x,&y);
+		txdata.target = isROBOcop;
+		txdata.type = anal_x;
+		txdata.data = x_anal;
+		sendData42(txdata);
+
+		txdata.type = anal_y;
+		txdata.data = y_anal;
+		sendData42(txdata);
+}
+if (accelOn){
+	testx = MMA1_MeasureGetRawX();//MMA1_GetXmg();
+	//testx = x_ac>>8;
+	testy = MMA1_MeasureGetRawY();
+	//testy = x_ac>>8;
+
+	x_accel = ScaleToU8(testx,TRUE);
+	y_accel = ScaleToU8(testy,FALSE);;
+
 
 	txdata.target = isROBOcop;
-	txdata.type = anal_x;
-	txdata.data = x;
+	txdata.type = accel_x;
+	txdata.data = x_accel;
 	sendData42(txdata);
 
-	txdata.type = anal_y;
-	txdata.data = y;
+	txdata.type = accel_y;
+	txdata.data = y_accel;
 	sendData42(txdata);
+
+}
 #endif
 #if PL_HAS_MOTOR
 	if(valX > 0) {

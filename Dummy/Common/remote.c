@@ -15,7 +15,7 @@
 #include "Fight.h"
 
 
-bool remoteOn;
+bool remoteOn, analogOn, accelOn;
 bool calibratetY, calibratetX;
 
 void sendData42(protocol42 txdata){
@@ -75,7 +75,7 @@ void reciveData42(protocol42 rxdata){
 			xcalib = rxdata.data;
 			calibratetX = TRUE;
 		}
-		valX = (ScaleToPercent(rxdata.data, TRUE)>>1);
+		valX = (ScaleToPercent(rxdata.data, TRUE, TRUE)>>1);
 
 		break;
 	case anal_y:
@@ -83,29 +83,20 @@ void reciveData42(protocol42 rxdata){
 			ycalib = rxdata.data;
 			calibratetY = TRUE;
 		}
-		valY = ScaleToPercent(rxdata.data, FALSE);
-/*
-	testi = valX;
-	testii = valY;
-
-	if((testi != testi_old) || (testii != testii_old)) {
-
-		CLS1_SendStr((unsigned char*)"X Value: ", io->stdOut);
-		CLS1_SendNum16s(testi, io->stdOut);
-
-		CLS1_SendStr((unsigned char*)"     Y Value: ", io->stdOut);
-		CLS1_SendNum32s(testii, io->stdOut);
-
-		buf[0] = '\0';
-		UTIL1_strcat(buf, sizeof(buf), (unsigned char*)"\r\n");
-		CLS1_SendStr(buf, io->stdOut);
-		testi_old = testi;
-		testii_old = testii;
-	}
-
-*/
+		valY = ScaleToPercent(rxdata.data, FALSE, TRUE);
 
 		break;
+
+	case accel_x:
+		valX = ScaleToPercent(rxdata.data, FALSE, FALSE)>>1;
+
+		break;
+
+	case accel_y:
+		valY = ScaleToPercent(rxdata.data, FALSE, FALSE);
+
+		break;
+
 	default:
 		break;
 	}
@@ -139,27 +130,33 @@ int32_t u8To32s(uint8_t val, bool x) {
 
 }
 
-int8_t ScaleToPercent(uint8_t val, bool x) {
+int8_t ScaleToPercent(uint8_t val, bool x, bool isAnalog) {
 
   int8_t temp;
   uint8_t calib, min;
 
-	if(x){
-		calib = xcalib;
-		min = xmin;
-	}
-	else {
-		calib = ycalib;
-		min = ymin;
-	}
+  if(isAnalog) {
+		if(x){
+			calib = xcalib;
+			min = xmin;
+		}
+		else {
+			calib = ycalib;
+			min = ymin;
+		}
+  }
+  else {
+	  calib = 127;
+	  min = 0;
+  }
 
   if(val < calib){
 		  temp = -100+(100*(val-min))/(calib-min);
 	  }
-	  else if(val > calib){
+ else if(val > calib){
 		  temp = (100*(val-calib))/(255-calib);
 	  }
-	  else {
+ else {
 		  temp = 0;
 	  }
 
