@@ -15,7 +15,7 @@
 #include "Fight.h"
 
 
-bool remoteOn, analogOn, accelOn;
+bool remoteOn, analogOn, accelOn, reflOn;
 bool calibratetY, calibratetX;
 
 void sendData42(protocol42 txdata){
@@ -73,6 +73,12 @@ void reciveData42(protocol42 rxdata){
 	case goFastFW:
 
 		EVNT_SetEvent(EVNT_GO_FAST_FW);
+
+		break;
+
+	case toggleRefl:
+
+		EVNT_SetEvent(EVNT_REFL_TOG);
 
 		break;
 

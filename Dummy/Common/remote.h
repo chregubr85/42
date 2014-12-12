@@ -16,7 +16,7 @@
 #define ADDR_ROBO 42
 #define ADDR_FRDM 43
 
-extern bool remoteOn, analogOn, accelOn;
+extern bool remoteOn, analogOn, accelOn, reflOn;
 extern bool calibratetY, calibratetX;
 
 int32_t valX, valY;
@@ -25,6 +25,7 @@ typedef enum{
 	activateRemote,
 	activateFight,
 	goFastFW,
+	toggleRefl,
 	anal_x, //HIHI ANAL
 	anal_y,
 	accel_x,

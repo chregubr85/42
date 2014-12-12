@@ -71,7 +71,7 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 #if PL_NOF_KEYS >= 1
 	#if PL_IS_FRDM
 		  if (keys==(1<<0)) {
-			EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
+			EVNT_SetEvent(EVNT_BTN_GREEN_PRESSED);
 		  }
 	#elif PL_IS_ROBO
 		  if (keys==(1<<0)) {
@@ -91,7 +91,7 @@ static void KEYDBNC_OnDebounceEvent(DBNC_EventKinds event, DBNC_KeySet keys) {
 #endif
 #if PL_NOF_KEYS >= 4
       if (keys==(1<<3)) {
-        EVNT_SetEvent(EVNT_BTN_GREEN_PRESSED);
+        EVNT_SetEvent(EVNT_BTN_RED_PRESSED);
       }
 #endif
 #if PL_NOF_KEYS >= 5

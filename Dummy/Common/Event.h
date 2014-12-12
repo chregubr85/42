@@ -24,6 +24,7 @@ typedef enum EVNT_Handle {
 	  EVNT_FIGHTMODE_ACTIVATE,
 	  EVNT_FIGHTMODE_DEACTIVATE,
 	  EVNT_GO_FAST_FW,
+	  EVNT_REFL_TOG,
 	#endif
 	#if PL_IS_FRDM & PL_HAS_JOYSTICK
 	  // Button Red

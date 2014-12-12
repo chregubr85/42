@@ -160,6 +160,18 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_GREEN_PRESSED:
+		#if PL_HAS_REMOTE
+			if(!reflOn){
+				txdata.target = isROBOcop;
+				txdata.type = toggleRefl;
+				sendData42(txdata);
+			}
+			else {
+				txdata.target = isROBOcop;
+				txdata.type = toggleRefl;
+				sendData42(txdata);
+			}
+		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
@@ -287,6 +299,20 @@ void APP_HandleEvent(EVNT_Handle event){
 		  		vTaskDelay(500/TRG_TICKS_MS);
 		  		FRTOS1_vTaskResume(remoteTask);
 			#endif
+		break;
+
+	case EVNT_REFL_TOG:
+		if(!reflOn) {
+			FRTOS1_vTaskSuspend(checkRefl);
+			vTaskDelay(50/TRG_TICKS_MS);
+			reflOn = TRUE;
+		}
+		else {
+			FRTOS1_vTaskResume(checkRefl);
+			vTaskDelay(50/TRG_TICKS_MS);
+			reflOn = FALSE;
+		}
+
 		break;
 
 
