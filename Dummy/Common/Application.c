@@ -280,9 +280,12 @@ void APP_HandleEvent(EVNT_Handle event){
 #endif
 	case EVNT_GO_FAST_FW:
 			#if PL_HAS_REMOTE && PL_HAS_MOTOR
+				FRTOS1_vTaskSuspend(remoteTask);
+				vTaskDelay(50/TRG_TICKS_MS);
 		  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 100);
 		  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 100);
 		  		vTaskDelay(500/TRG_TICKS_MS);
+		  		FRTOS1_vTaskResume(remoteTask);
 			#endif
 		break;
 
