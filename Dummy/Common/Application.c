@@ -168,10 +168,12 @@ void APP_HandleEvent(EVNT_Handle event){
 				sendData42(txdata);
 				if(!remoteOn) {
 					remoteOn = TRUE;
+					accelOn = TRUE;
 					EVNT_SetEvent(EVNT_REMOTE_ACTIVATE);
 				}
 				else {
 					remoteOn = FALSE;
+					accelOn = FALSE;
 					EVNT_SetEvent(EVNT_REMOTE_DEACTIVATE);
 				}
 		#endif
@@ -184,17 +186,17 @@ void APP_HandleEvent(EVNT_Handle event){
 		break;
 	case  EVNT_BTN_F_PRESSED:
 		#if PL_HAS_REMOTE
-		txdata.target = isROBOcop;
-		txdata.type = activateFight;
-		sendData42(txdata);
-		if(!fightOn) {
-			fightOn = TRUE;
-			EVNT_SetEvent(EVNT_FIGHTMODE_ACTIVATE);
-		}
-		else {
-			fightOn = FALSE;
-			EVNT_SetEvent(EVNT_FIGHTMODE_DEACTIVATE);
-		}
+			txdata.target = isROBOcop;
+			txdata.type = activateFight;
+			sendData42(txdata);
+			if(!fightOn) {
+				fightOn = TRUE;
+				EVNT_SetEvent(EVNT_FIGHTMODE_ACTIVATE);
+			}
+			else {
+				fightOn = FALSE;
+				EVNT_SetEvent(EVNT_FIGHTMODE_DEACTIVATE);
+			}
 		#endif
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
@@ -204,6 +206,23 @@ void APP_HandleEvent(EVNT_Handle event){
 		#endif
 		break;
 	case  EVNT_BTN_KEY_PRESSED:
+		#if PL_HAS_REMOTE
+				txdata.target = isROBOcop;
+				txdata.type = activateRemote;
+				sendData42(txdata);
+				if(!remoteOn) {
+					remoteOn = TRUE;
+					analogOn = TRUE;
+					EVNT_SetEvent(EVNT_REMOTE_ACTIVATE);
+				}
+				else {
+					remoteOn = FALSE;
+					analogOn = FALSE;
+					EVNT_SetEvent(EVNT_REMOTE_DEACTIVATE);
+				}
+		#endif
+
+
 		#if PL_IS_FRDM & !PL_HAS_RADIO
 			LedBLUE_Neg();
 		#endif
@@ -217,6 +236,10 @@ void APP_HandleEvent(EVNT_Handle event){
 			FRTOS1_vTaskResume(remoteTask);
 		break;
 	case EVNT_REMOTE_DEACTIVATE:
+#if PL_HAS_MOTOR
+	  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
+	  		MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
+#endif
 			FRTOS1_vTaskSuspend(remoteTask);
 		break;
 #endif
@@ -230,16 +253,16 @@ void APP_HandleEvent(EVNT_Handle event){
 		  	MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
 		break;
 #endif
-#if PL_HAS_ACCEL
+#if PL_HAS_ACCEL && PL_HAS_MOTOR
 	case EVNT_FREEFALL:
-			FRTOS1_vTaskSuspend(fightTask);
+	/*		FRTOS1_vTaskSuspend(fightTask);
 			fightOn = FALSE;
 			FRTOS1_vTaskSuspend(remoteTask);
 			remoteOn = FALSE;
 			vTaskDelay(100/TRG_TICKS_MS);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_LEFT), 0);
 			MOT_SetSpeedPercent(MOT_GetMotorHandle(MOT_MOTOR_RIGHT), 0);
-			vTaskDelay(100/TRG_TICKS_MS);
+			vTaskDelay(100/TRG_TICKS_MS);*/
 		break;
 #endif
 	default:

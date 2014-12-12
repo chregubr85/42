@@ -16,7 +16,7 @@
 #define ADDR_ROBO 42
 #define ADDR_FRDM 43
 
-extern bool remoteOn;
+extern bool remoteOn, analogOn, accelOn;
 extern bool calibratetY, calibratetX;
 
 int32_t valX, valY;
@@ -25,7 +25,9 @@ typedef enum{
 	activateRemote,
 	activateFight,
 	anal_x, //HIHI ANAL
-	anal_y
+	anal_y,
+	accel_x,
+	accel_y
 } protocol42_type;
 
 typedef enum{
@@ -47,7 +49,7 @@ void reciveData42(protocol42 rxdata);
 
 int32_t u8To32s(uint8_t val, bool x);
 
-int8_t ScaleToPercent(uint8_t val, bool x);
+int8_t ScaleToPercent(uint8_t val, bool x, bool isAnalog);
 
 void remoteInit(void);
 
