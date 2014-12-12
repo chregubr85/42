@@ -109,12 +109,17 @@ void FightmodusV2(void){
 		case SEARCH_ENEMY:
 			us = US_Measure_us();
 			cm = US_usToCentimeters(us, 22);
-			if(++iter > 200){
+			if(++iter > 50){
 				fight_state = DRIVE_DIRECT;
 				iter = 0;
+				break;
 			}
 			else if((cm<50)&&(cm>3)){
 				fight_state=DRIVE_DIRECT;
+				break;
+			}
+			else{
+				fight_state=FIND_ENEMY;
 			}
 			break;
 		case DRIVE_DIRECT:
